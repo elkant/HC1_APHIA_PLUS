@@ -8,7 +8,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.sql.SQLException;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -287,7 +290,13 @@ String colfacilitatorarray[]=null;
                     
                     String maxtopicid=uniqueid(); 
                     
-                    query1 = "insert into new_topic (new_topic_id, marking_status, facilitator_id, topic_id, expected_sessions,start_date,end_date,year,marking_date,year2,period,month)values('" +maxtopicid+ "','no','" + facil + "','" + joinedtopicids + "','" + expected_no_of_lessons + "','" + start_date + "','" + end_date + "','" + new_end_date + "','" + current_time + "','" + year2 + "','" + period + "','" + selected_month + "')";
+                     Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    String mdate;
+
+                    Date mydate = new Date();
+                    mdate = formatter.format(mydate);
+                    
+                    query1 = "insert into new_topic (new_topic_id, marking_status, facilitator_id, topic_id, expected_sessions,start_date,end_date,year,marking_date,year2,period,month,timestamp)values('" +maxtopicid+ "','no','" + facil + "','" + joinedtopicids + "','" + expected_no_of_lessons + "','" + start_date + "','" + end_date + "','" + new_end_date + "','" + current_time + "','" + year2 + "','" + period + "','" + selected_month + "','"+mdate+"')";
                     conn.st.executeUpdate(query1);
 
                     //session.setAttribute("topics_added", "<font color=\"green\">topics added </font>");

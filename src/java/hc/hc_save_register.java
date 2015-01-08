@@ -5,11 +5,13 @@
 package hc;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.sql.SQLException;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,12 +40,13 @@ public class hc_save_register extends HttpServlet {
             throws ServletException, IOException {
 
         session = request.getSession();
- ArrayList methods = new ArrayList();
+    ArrayList methods = new ArrayList();
     ArrayList datepicker = new ArrayList();
     ArrayList time = new ArrayList();
     ArrayList malecondoms = new ArrayList();
     ArrayList femalecondoms = new ArrayList();
-
+    Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    
         try {
             response.setContentType("text/html;charset=UTF-8");
 
@@ -215,10 +218,13 @@ public class hc_save_register extends HttpServlet {
                 if (!conn.rs_5.next()) {
                     for (int t = 0; t < no_of_lessons; t++) {
 
+ String mdate2;
 
+                    Date mydate2 = new Date();
+                    mdate2 = formatter.format(mydate2);
 
-                        String savetosession = "insert into session (session_id,marking_status,marked_date,end_date,date,duration,male_cds,female_cds,topic_id,group_id,method_id,year,period,month) values "
-                                + "('" + uniqueid().trim() + "','no','" + session.getAttribute("nt_unique_marking_date").toString() + "','" + session.getAttribute("hc_nt_end_date") + "','" + datepicker.get(t) + "','" + time.get(t) + "','" + malecondoms.get(t) + "','" + femalecondoms.get(t) + "','" + alltopicidsarr[t] + "','" + session.getAttribute("s_group_name") + "','" + methods.get(t) + "','" + session.getAttribute("year") + "','" + session.getAttribute("period") + "','" + selected_month + "')";
+                        String savetosession = "insert into session (session_id,marking_status,marked_date,end_date,date,duration,male_cds,female_cds,topic_id,group_id,method_id,year,period,month,timestamp) values "
+                                + "('" + uniqueid().trim() + "','no','" + session.getAttribute("nt_unique_marking_date").toString() + "','" + session.getAttribute("hc_nt_end_date") + "','" + datepicker.get(t) + "','" + time.get(t) + "','" + malecondoms.get(t) + "','" + femalecondoms.get(t) + "','" + alltopicidsarr[t] + "','" + session.getAttribute("s_group_name") + "','" + methods.get(t) + "','" + session.getAttribute("year") + "','" + session.getAttribute("period") + "','" + selected_month + "','"+mdate2+"')";
 
 
 
@@ -240,7 +246,16 @@ public class hc_save_register extends HttpServlet {
 
                 String formuniqid=uniqueid();
                 
-                conn.st4.executeUpdate("insert into forms(form_id,form_number,year,period,month) value('" + formuniqid + "','" + formnumber.trim() + "','" + session.getAttribute("year") + "','" + session.getAttribute("period") + "','" + selected_month + "')");
+          
+                    String mdate;
+
+                    Date mydate = new Date();
+                    mdate = formatter.format(mydate);
+               // timestamp='"+mdate+"',
+                
+                
+                
+                conn.st4.executeUpdate("insert into forms(form_id,form_number,year,period,month,timestamp) value('" + formuniqid + "','" + formnumber.trim() + "','" + session.getAttribute("year") + "','" + session.getAttribute("period") + "','" + selected_month + "','"+mdate+"')");
 //get the just saved form id
                 
                 //this part should only work if we used an autoincrement id
@@ -316,9 +331,13 @@ conn.rs_6 = conn.st_6.executeQuery(qr4);
                                 reviewer = request.getParameter("reviewer");
                                 submission_date = request.getParameter("submission_date");
 
+                                 String mdate1;
 
-                                String save = "insert into register_attendance (register_id, reviewer_name,submission_date,form_id,marked_date,facilitator_id,image_path,member_id,end_date,session_id,availability) "
-                                        + "values('" + uniqueid().trim() + "','" + reviewer + "','" + submission_date + "','" +formuniqid + "','" + session.getAttribute("nt_unique_marking_date").toString() + "','" + session.getAttribute("hc_nt_facil").toString() + "','" + ipath + "','" + partis_id + "','" + session.getAttribute("hc_nt_end_date") + "','" + topic + "','" + status + "')";
+                    Date mydate1 = new Date();
+                    mdate1 = formatter.format(mydate1);
+
+                                String save = "insert into register_attendance (register_id, reviewer_name,submission_date,form_id,marked_date,facilitator_id,image_path,member_id,end_date,session_id,availability,timestamp) "
+                                        + "values('" + uniqueid().trim() + "','" + reviewer + "','" + submission_date + "','" +formuniqid + "','" + session.getAttribute("nt_unique_marking_date").toString() + "','" + session.getAttribute("hc_nt_facil").toString() + "','" + ipath + "','" + partis_id + "','" + session.getAttribute("hc_nt_end_date") + "','" + topic + "','" + status + "','"+mdate1+"')";
 
                                 // System.out.println(" check box :"+request.getParameter("cb"+col+row));
                                 System.out.println(save);

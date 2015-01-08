@@ -9,7 +9,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.sql.SQLException;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -116,7 +119,13 @@ System.out.println("SELECTED MONTH "+selected_month);
 //              found=conn.rs.getInt(1);
 //          }
 //          if(found==0){
-                        String query1 = "INSERT INTO member_details (member_id,first_name,mname,sur_name,sex,age,group_id,sessions_attended,year,period,month)values('" + uniqueid() + "','" + fname1 + "','" + mname1 + "','" + lname1 + "','" + sex1 + "','" + age1 + "','" + group + "','0','" + year + "','" + period + "','"+selected_month+"')";
+                         Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    String mdate;
+
+                    Date mydate = new Date();
+                    mdate = formatter.format(mydate);
+                        
+                        String query1 = "INSERT INTO member_details (member_id,first_name,mname,sur_name,sex,age,group_id,sessions_attended,year,period,month,timestamp)values('" + uniqueid() + "','" + fname1 + "','" + mname1 + "','" + lname1 + "','" + sex1 + "','" + age1 + "','" + group + "','0','" + year + "','" + period + "','"+selected_month+"','"+mdate+"')";
 
                         String chck_existence = "SELECT COUNT(member_id) FROM member_details WHERE first_name='" + fname1 + "'&& mname='" + mname1 + "'&& sur_name='" + lname1 + "'&& age='" + age1 + "' && group_id='" + group + "'&& year='" + year + "' && period='"+period+"' && month='" + selected_month + "'";
                         conn.rs = conn.st.executeQuery(chck_existence);

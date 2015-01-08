@@ -7,7 +7,10 @@ package hc;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -75,11 +78,15 @@ existing+=","+grp1;
 if(found==0){
     grp1=grp1.toUpperCase();
     
-    
+ Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    String mdate;
+
+                    Date mydate = new Date();
+                    mdate = formatter.format(mydate);    
     
     String grpid=uniqueid().trim();
    session.setAttribute("added_group_id", grpid); 
-query1="insert into groups (group_id,group_name,partner_id,target_pop_id,district_id) VALUES('"+grpid+"','"+grp1+"','"+session.getAttribute("partner_id")+"','"+session.getAttribute("target_id") +"','"+session.getAttribute("district_id") +"')";
+query1="insert into groups (group_id,group_name,partner_id,target_pop_id,district_id,timestamp) VALUES('"+grpid+"','"+grp1+"','"+session.getAttribute("partner_id")+"','"+session.getAttribute("target_id") +"','"+session.getAttribute("district_id") +"','"+mdate+"')";
 conn.st.executeUpdate(query1);
 added+=","+grp1;
 System.out.println("groups added successfully"+query1);
