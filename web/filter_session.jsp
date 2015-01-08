@@ -395,7 +395,7 @@ xmlhttp.send();
 </head>
 <body onload=" filter_partner();get_years(); get_period();">
 
-<div id="container" >
+<div id="container" style="height:800px;">
  <%   if(session.getAttribute("level").equals("2")){
             %>
 <%@include file="/menu/clerkmenu.jsp"%>
@@ -493,7 +493,7 @@ return ((int)(fraction + start));
     <%if (session.getAttribute("sc_group_name") != null) {%>
     
 <td rowspan="9"style="background-color: white;"></td>
-        <td rowspan="10"style="background-color: white;"><p style="font-size: 18px;background-color: orange;">
+        <td rowspan="10"style="background-color: white;width:370px;"><p style="font-size: 18px;background-color: orange;">
     
         <br/><b>Last Marked Details </b></p>
             
@@ -510,10 +510,16 @@ return ((int)(fraction + start));
         
         
     </p> <p style="font-size: 18px;background-color: white; text-align:left ;">
-        <br/><b>Group  :</b> <%out.println(session.getAttribute("sc_group_name").toString().toUpperCase());%>
+        <br/><b>Group  :</b> <%out.println(session.getAttribute("sc_group_name").toString().toUpperCase());%> (
+      <%out.println(session.getAttribute("addedmembers").toString().toUpperCase());%> members
+        )</p>
         
-        
+    <p style="font-size: 18px;background-color: white; text-align:left ;">
+        <br/> <b>Year : </b><%out.println(session.getAttribute("year")); %>   </p> 
     
+        
+   <p style="font-size: 18px;background-color: white; text-align:left ;">
+        <br/> <b>Month : </b><%out.println(session.getAttribute("selected_month"));%>    </p> 
     
         <br/><br/><a href="sessions_session_holder" class="linkstyle" style="width:130px;">View last Marked</a>
             

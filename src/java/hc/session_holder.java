@@ -187,6 +187,9 @@ System.out.println("target population name is "+session.getAttribute("cc_target_
             if (!request.getParameter("number_of_members").equals("")) {
                 noofrows = Integer.parseInt(request.getParameter("number_of_members"));
             }
+            
+            
+            session.setAttribute("addedmembers",noofrows);
             for (int a = 1; a <= noofrows; a++) {
 
                 createdtable += "<tr><td>" + a + "</td>"
