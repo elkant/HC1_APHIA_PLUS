@@ -231,9 +231,9 @@
 
             <br/>
             <h3 style="text-align: center; background-color: orange;">Backup History<img src="images/help.png" id="opener" title="Click Here to view Help For this Page." alt=" Help Image " style=" width: 40px; height: 40px;"></h4>
-                    <div id="dialog" title="Editing Participants Help." style=" font-size: 17px;">
+                    <div id="dialog" title="Backup History Help." style=" font-size: 17px;">
 
-
+This page shows the various dates that one has created a data backup , and whether the backup was sent via internet connection or not. 
                   
                     </div></h3>
 

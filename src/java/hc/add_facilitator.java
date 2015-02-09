@@ -7,7 +7,10 @@ package hc;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -123,9 +126,14 @@ int found,exist,added;
          //add a confrimation that some facilitators have been added indeed.
          session.setAttribute("isfacilsadded", "1");
          
-            
+            Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    String mdate;
+
+                    Date mydate = new Date();
+                    mdate = formatter.format(mydate);
+                        
          
-             query1="insert into facilitator_details set facilitator_id='"+id+"', first_name='"+fname1+"', middle_name='"+mname1+"',sur_name='"+lname1+"', phone='"+phone1+"',partner_id='"+session.getAttribute("partner_id") +"',groups_id='"+groups1+"'";
+             query1="insert into facilitator_details set facilitator_id='"+id+"', first_name='"+fname1+"', middle_name='"+mname1+"',sur_name='"+lname1+"', phone='"+phone1+"',partner_id='"+session.getAttribute("partner_id") +"',groups_id='"+groups1+"', timestamp='"+mdate+"'";
           added+=conn.st.executeUpdate(query1);
 //             added++;
             success=fullname+",";

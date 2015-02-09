@@ -88,7 +88,24 @@ xmlhttp.send();
 //load target pop
 
 
+function targetsperyear(){
+var yr=document.getElementById("year").value;
 
+document.getElementById("targetpop").innerHTML='<option value=\"\">loading targets..</option>';
+ $.ajax({
+    url:"targetpopnames_yearly?year="+yr,
+    type:'post',
+    dataType:'html',
+    success:function(data){
+//        alert(data);
+        document.getElementById("targetpop").innerHTML=data;
+        
+    }
+});
+
+
+
+}
 
 
 
@@ -146,7 +163,7 @@ xmlhttp.send();
 <form action="agebasedkepms" method="post">
 <table cellpadding="2px" cellspacing="3px" border="0px">
 <tr> <td class="align_button_right" style="width:300px;">Choose PEPFAR Year <font color="red">*</font></td>
-<td><Select name="year" id="year" class="textbox"   required ="true" style="width:200px;">
+<td><Select name="year" id="year" class="textbox" onchange="targetsperyear();"   required ="true" style="width:200px;">
  <option value="">Choose Year</option> </select></td></tr>
 
 <tr> <td class="align_button_right" style="width:300px;">Choose Target Population <font color="red">*</font></td>

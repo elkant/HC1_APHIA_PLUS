@@ -151,7 +151,7 @@
                             callback : function(value, settings)
                             { 
                                 //alert(value);
-                                window.location.reload();
+                                //window.location.reload();
                                 // settings involing plugin parameters
                                 //                                                                                                                        alert('Element Changed : '+value);											
                                 //alert(settings.cssclass);
@@ -185,7 +185,7 @@
                         },
                          {
                             event: 'mouseover',
-                            indicator: 'Saving...',
+                            indicator:'Saving...',
                             tooltip:'doubleclick to edit',                                                            					tooltip: 'Click to edit ',
                             type: 'text',
                             submit:'Save changes',

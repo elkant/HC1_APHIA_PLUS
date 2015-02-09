@@ -670,6 +670,10 @@
         <servlet-name>checkbackup</servlet-name>
         <servlet-class>SCRIPTS.checkbackup</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AutoBackup</servlet-name>
+        <servlet-class>backup.AutoBackup</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>add_district</servlet-name>
         <url-pattern>/add_district</url-pattern>
@@ -1337,6 +1341,10 @@
     <servlet-mapping>
         <servlet-name>checkbackup</servlet-name>
         <url-pattern>/checkbackup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AutoBackup</servlet-name>
+        <url-pattern>/AutoBackup</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>900000</session-timeout>

@@ -222,12 +222,14 @@ else{quarters="0";}
             
         }  
         
-        PrintWriter out = response.getWriter();
-        try {
-           
-        } finally {            
-            out.close();
-        }
+          
+          
+//        PrintWriter out = response.getWriter();
+//        try {
+//           
+//        } finally {            
+//            out.close();
+//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

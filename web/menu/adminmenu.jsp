@@ -163,7 +163,8 @@ and open the template in the editor.
                      <li><a href="dqa_invaliddata.jsp">check invalid dates</a> </li>  
                      <li><a href="dqa_duplicateshome.jsp">check duplicates</a> </li>  
                       <li><a href="dqa_unmarkeddata.jsp">check incomplete records</a> </li>       
-                      <li><a href="dqanullform.jsp">check null form number</a> </li>       
+                      <li><a href="dqanullform.jsp">check null form number</a> </li> 
+                      <li><a href="backuphistory.jsp">backup history</a> </li> 
                     </ul>
                     </li>
                  <li><a href="logout.jsp">logout</a>

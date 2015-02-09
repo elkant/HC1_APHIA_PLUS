@@ -48,8 +48,8 @@
         <link href="media/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" media="all" />
         <link href="media/themes/smoothness/jquery-ui-1.7.2.custom.css" rel="stylesheet" type="text/css" media="all" />
         <link rel="stylesheet" href="themes/base/jquery.ui.all.css">
-         <script src="scripts/jquery.jeditable.datepicker.js" type="text/javascript"></script>
-         <script src="js/datepicker.js" type="text/javascript"></script>
+        <script src="scripts/jquery.jeditable.datepicker.js" type="text/javascript"></script>
+        <script src="js/datepicker.js" type="text/javascript"></script>
         <link rel="stylesheet" href="themes/base/jquery.ui.datepicker.css">
           
         

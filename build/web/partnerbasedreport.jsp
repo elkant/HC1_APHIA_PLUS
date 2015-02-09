@@ -71,6 +71,7 @@ xmlhttp.open("POST","years_loader",true);
 xmlhttp.send();
 
   $.ajax({
+      
     url:"uniquetargetpop",
     type:'post',
     dataType:'html',
@@ -91,7 +92,7 @@ xmlhttp.send();
 function targetsperyear(){
 var yr=document.getElementById("year").value;
 
-document.getElementById("targetpop").innerHTML='loading targets..';
+document.getElementById("targetpop").innerHTML='<option value=\"\">loading targets..</option>';
  $.ajax({
     url:"targetpopnames_yearly?year="+yr,
     type:'post',

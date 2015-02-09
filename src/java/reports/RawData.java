@@ -16,15 +16,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFFont;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFFont;
@@ -62,26 +56,40 @@ public class RawData extends HttpServlet {
        String period[]=request.getParameterValues("quarter");
        String quarterqr="";
        String yearsqr="";
+       String datetype=request.getParameter("datetype");
        
+    String startdate="";
+    
+    String enddate="";
     
        
        
        //=================================================================
-       
-       
+       if(datetype.equals("quarter")){
+ 
        if(period.length>0){ 
        quarterqr=" and (";
            for(int a=0;a<period.length;a++){
            
            quarterqr+=" member_details.period='"+period[a]+"'";
            
-           if(a<period.length&&period.length!=1){quarterqr+=" OR ";}
+           if(a<period.length-1&&period.length!=1){quarterqr+=" OR ";}
            
            }
-            quarterqr+=" )";
+            quarterqr+=" ) ";
        
        }
+       }
+       else {
+           
+       startdate=request.getParameter("startdate");    
+       enddate=request.getParameter("enddate");    
+           
        
+       quarterqr=" and ( member_details.timestamp >='"+startdate+"' and member_details.timestamp <='"+enddate+"' ) ";
+       
+       
+       }
        
        //==================================================================
        
@@ -100,7 +108,7 @@ public class RawData extends HttpServlet {
             } else {
        targetqr=" and (";
            for(int a=0;a<targetpopulation.length;a++){
-           System.out.println("__"+targetpopulation);
+          // System.out.println("__"+targetpopulation[a]);
            targetqr+=" population_name LIKE '"+targetpopulation[a]+"'";
            
            if(a<targetpopulation.length-1){targetqr+=" OR ";}
@@ -140,12 +148,12 @@ public class RawData extends HttpServlet {
 +" and register_attendance.marked_date=new_topic.marking_date "
 + " and register_attendance.form_id=forms.form_id"
 +" and sessions_attended >=0   and sex !=''and member_details.year='"
-+year+"' "+targetqr + " group by member_details.member_id ";
++year+"' "+targetqr + quarterqr+" group by member_details.member_id ";
         
        dbConn conn= new dbConn(); 
        System.out.println(querydata); 
        
-       conn.rs=conn.st.executeQuery(querydata);
+      conn.rs=conn.st.executeQuery(querydata);
        
        
        

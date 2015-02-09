@@ -85,6 +85,33 @@ $( "#accordion" ).accordion();
                          });
                     
               
+              
+       //======================Create autobackup==========================
+
+
+
+  
+                    $.ajax({
+                        url:'AutoBackup',                         
+                        type:'post',  
+                        dataType: 'html',  
+                    success: function(data) {
+                     
+//                             var n = noty({text:data,
+//                        layout: 'top',
+//                        type: 'Success',
+//                        timeout: 1800,
+//        animation: {
+//        open: {height: 'toggle'}, // jQuery animate function property object
+//        close: {height: 'toggle'}, // jQuery animate function property object
+//        easing: 'swing', // easing
+//        speed: 500 // opening & closing animation speed
+//    }            
+//        }); 
+                    }
+                        
+                         });
+              
                     
                 </script> <%
                 
@@ -193,7 +220,7 @@ Calendar cal = Calendar.getInstance();
 int year= cal.get(Calendar.YEAR);  
 dbConn conn=new dbConn();
 
-String versionupdate="ALTER TABLE `version` ADD COLUMN `date` VARCHAR(45)  NULL DEFAULT  '2014_11_07'  AFTER `version_name` , ADD COLUMN `updateslink` VARCHAR(45)  NULL DEFAULT  'HC1_VERSION_01'  AFTER `date` ";
+String versionupdate="ALTER TABLE `version` ADD COLUMN `date` VARCHAR(45)  NULL DEFAULT  '2015_01_12'  AFTER `version_name` , ADD COLUMN `updateslink` VARCHAR(45)  NULL DEFAULT  'HC1_VERSION_01'  AFTER `date` ";
  String ch1 = "SHOW COLUMNS FROM version LIKE 'date'";
             conn.rs = conn.st.executeQuery(ch1);
             if (!conn.rs.next()) {
@@ -201,7 +228,7 @@ String versionupdate="ALTER TABLE `version` ADD COLUMN `date` VARCHAR(45)  NULL 
                 conn.st1.executeUpdate(versionupdate);
                 
                   }
-         else { conn.st1.executeUpdate("update version set date='2014_12_16' ,version_name='HC1_VERSION_O1' ,updateslink='' where version_id='1' "); }
+         else { conn.st1.executeUpdate("update version set date='2015_01_12' ,version_name='HC1_VERSION_O1' ,updateslink='' where version_id='1' "); }
 
 
 conn.rs=conn.st.executeQuery("select version_name , date from version");          

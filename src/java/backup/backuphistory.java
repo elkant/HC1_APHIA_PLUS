@@ -36,15 +36,10 @@ public class backuphistory extends HttpServlet {
          String category="";
      
          
-       
-     
-         
    String table=" <thead>"
 		            +" <tr>"
                            +" <th>Backup Date</th>"
-		      
                            +" <th>Backup Sent via internet</th>"
-                          
                             +" </tr>"		                
 		            +" </thead>"
 		            +" <tbody>";
