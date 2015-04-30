@@ -66,7 +66,7 @@ public class checkbackup extends HttpServlet {
             
             String is20recordsunsaved=" select count(*) as records from member_details where timestamp >= '"+lasttimebackuptime+"'";
             
-            System.out.println(is20recordsunsaved);
+           // System.out.println(is20recordsunsaved);
             
             conn.rs1=conn.st1.executeQuery(is20recordsunsaved);
             
@@ -80,7 +80,7 @@ public class checkbackup extends HttpServlet {
                 
                 String sikungapi="select datediff('"+mdate+"','"+lasttimebackuptime+"')";
                 
-                System.out.println(sikungapi);
+                //System.out.println(sikungapi);
                 
                 conn.rs2=conn.st3.executeQuery(sikungapi);
                 

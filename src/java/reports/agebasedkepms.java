@@ -207,6 +207,12 @@ String filepth=np;
             year = request.getParameter("year");}
             
           
+int yr=0;
+int prevyr=0;
+
+
+yr=Integer.parseInt(year);
+prevyr=yr-1; 
 
  
     String qry="SELECT count(member_details.member_id) as PARTICIPANT,"
@@ -224,20 +230,23 @@ String filepth=np;
 +" end as AGE_BRACKET "
 +" , partner_name as PARTNER,population_name as TARGET_POPULATION,"
 
+            
+            
+            
 
 +" case "
-+" when MONTH =1 THEN 'JAN'"
-+" when MONTH =2 THEN 'FEB'"
-+" when MONTH =3 THEN 'MAR'"
-+" when MONTH=4 THEN 'APR'"
-+" when MONTH=5 THEN 'MAY'"
-+" when MONTH=6 THEN 'JUN'"
-+" when MONTH=7 THEN 'JUL'"
-+" when MONTH=8 THEN 'AUG'"
-+" when MONTH=9 THEN 'SEP'"
-+" when MONTH=10 THEN 'OCT'"
-+" when MONTH=11 THEN 'NOV'"
-+" when MONTH=12 THEn 'DEC'"
++" when MONTH =1 THEN '"+yr+" (1) JAN'"
++" when MONTH =2 THEN '"+yr+" (2) FEB'"
++" when MONTH =3 THEN '"+yr+" (3) MAR'"
++" when MONTH=4 THEN '"+yr+" (4) APR'"
++" when MONTH=5 THEN '"+yr+" (5) MAY'"
++" when MONTH=6 THEN '"+yr+" (6) JUN'"
++" when MONTH=7 THEN '"+yr+" (7) JUL'"
++" when MONTH=8 THEN '"+yr+" (8) AUG'"
++" when MONTH=9 THEN '"+yr+" (9) SEP'"
++" when MONTH=10 THEN '"+prevyr+" (10) OCT'"
++" when MONTH=11 THEN '"+prevyr+" (11) NOV'"
++" when MONTH=12 THEn '"+prevyr+" (12) DEC'"
 +" END AS MONTHS"
 
 +" ,year as YEAR,Upper(county_name) as COUNTY  "

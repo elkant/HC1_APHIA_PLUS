@@ -286,10 +286,10 @@ else{
 chker();
 }
 }
-xmlhttp.open("POST","load_edit_attendance_ajax?group="+group+"&&year="+year+"&&period="+period+"&&month="+month,true);
+xmlhttp.open("POST","load_edit_attendance_ajax?group="+group+"&year="+year+"&period="+period+"&month="+month,true);
 xmlhttp.send();
 //empty the facilitators list first
-document.getElementById("facilitators").value="";
+//document.getElementById("facilitators").value="";
 loadfacilids();
 
 }
@@ -322,6 +322,9 @@ function loadfacilids(){
             
             
             document.getElementById("facilitators").value=data; 
+            
+         //   alert(document.getElementById("facilitators").value);
+            
         }
         
     })
@@ -339,8 +342,9 @@ function loadformids(){
         var facils=document.getElementById("facilitators").value;
         var year=document.getElementById("year").value;
         var month=document.getElementById("month").value;
+       document.getElementById("formid").innerHTML="<option value=''>loading..</option>";
         
-
+//alert(facils);
     $.ajax({        
         url:"loadforms?facils="+facils+"&year="+year+"&month="+month,
         type:'post',
@@ -511,7 +515,7 @@ return ((int)(fraction + start));
         
     </p> <p style="font-size: 18px;background-color: white; text-align:left ;">
         <br/><b>Group  :</b> <%out.println(session.getAttribute("sc_group_name").toString().toUpperCase());%> (
-      <%out.println(session.getAttribute("addedmembers").toString().toUpperCase());%> members
+      <% if(session.getAttribute("addedmembers")!=null){ out.println(session.getAttribute("addedmembers").toString().toUpperCase()); }%> members
         )</p>
         
     <p style="font-size: 18px;background-color: white; text-align:left ;">
@@ -615,7 +619,7 @@ return ((int)(fraction + start));
 
 </table>
 
-<input type="hidden" id="facilitators" name="facilitators" class="textbox6" />
+<input type="hidden" id="facilitators" name="facilitators" />
 
     <%
 Calendar cal = Calendar.getInstance();

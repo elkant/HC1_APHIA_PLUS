@@ -143,7 +143,6 @@ public class RawData extends HttpServlet {
 +" join curriculum on groups.target_pop_id=curriculum.target_id,county,register_attendance, facilitator_details,new_topic,forms "
 +" where district.county_id=county.county_id "
 +" and member_details.member_id=register_attendance.member_id "
-+" and member_details.member_id "
 +" and register_attendance.facilitator_id=facilitator_details.facilitator_id "
 +" and register_attendance.marked_date=new_topic.marking_date "
 + " and register_attendance.form_id=forms.form_id"
@@ -155,9 +154,6 @@ public class RawData extends HttpServlet {
        
       conn.rs=conn.st.executeQuery(querydata);
        
-       
-       
-        
        String columnheaders[]={"PARTICIPANT","GROUPNAME","AGE","SEX","DISTRICT","COUNTY","PARTNER","TARGET_POPULATION","SESSIONS_ATTENDED","EXPECTED_SESSION","MONTH","YEAR","QUARTER","FACILITATOR","START DATE","END DATE","FORM NO.","CURRICULUM"};
         
         

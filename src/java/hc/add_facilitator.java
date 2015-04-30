@@ -84,7 +84,7 @@ int found,exist,added;
             System.out.println("fname  :  "+fname1);
             if(!fname1.equals("")){
           fullname=fname1+" "+lname1;
-            String check_phone="SELECT * FROM facilitator_details WHERE phone='"+phone1+"' and first_name LIKE '"+fname1+"' and sur_name LIKE '"+lname1+"'";
+            String check_phone="SELECT * FROM facilitator_details WHERE phone='"+phone1+"' and first_name LIKE '"+fname1+"' and sur_name LIKE '"+lname1+"' and partner_id like '"+session.getAttribute("partner_id")+"' ";
             conn.rs=conn.st.executeQuery(check_phone);
             if(conn.rs.next()==true){
               //found=2; 

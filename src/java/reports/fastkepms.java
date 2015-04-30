@@ -260,10 +260,10 @@ int report2_m,report2_f;
          rw1cell41.setCellValue("Target Grouped");
          rw1cell51.setCellValue("Sex");
          rw1cell52.setCellValue("Target");
-         rw1cell61.setCellValue("Oct -Dec("+prev_yea+")");
-         rw1cell71.setCellValue("Jan-March");
-         rw1cell81.setCellValue("April -June");
-         rw1cell91.setCellValue("July-Sep");
+         rw1cell61.setCellValue("Oct-Dec ("+prev_yea+")");
+         rw1cell71.setCellValue("Jan-Mar ("+yea+")");
+         rw1cell81.setCellValue("Apr-Jun ("+yea+")");
+         rw1cell91.setCellValue("Jul-Sep ("+yea+")");
          rw1cell101.setCellValue("Total");
          rw1cell102.setCellValue("Achieved");
          

@@ -120,6 +120,7 @@ and open the template in the editor.
             <li><a href="groups_overall.jsp"><font color="red">Groups Completion rate (excel)</font></a></li>
             <li><a href="RawData.jsp"><font color="red">Raw Data (excel)</font></a></li>                   
                    <li><a href="agebasedkepms.jsp"><font color="red">Kepms report by age (excel)</font></a></li>
+                   <li><a href="newagebasedkepms.jsp"><font color="red">(New) kepms report by age (excel)</font></a></li>
                    <li><a href="partnerbasedreport.jsp"><font color="red">Kepms report by Target Pop. (excel)</font></a></li>
                 <li><a href="overall_target_bar.jsp">Target Populations Completion Rates (bar)</a></li>
                   <li><a href="kePMS_bar.jsp">PEPFAR Report (bar)</a></li>

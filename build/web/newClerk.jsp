@@ -46,11 +46,9 @@
    <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
 
 <script type="text/javascript" src="js/noty/jquery.noty.js"></script>
-
 <script type="text/javascript" src="js/noty/layouts/top.js"></script>
 <script type="text/javascript" src="js/noty/layouts/center.js"></script>
 <!-- You can add more layouts if you want -->
-
 <script type="text/javascript" src="js/noty/themes/default.js"></script>
       <script type="text/javascript">
            

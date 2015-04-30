@@ -35,7 +35,7 @@ public class checkgroup extends HttpServlet {
     
     String grpname=request.getParameter("groupname");
     
-    String qr="select * from groups where group_name LIKE '"+grpname.trim()+"'";
+    String qr="select group_name,partner_name,population_name from groups join partner on groups.partner_id=partner.partner_id join target_population on groups.target_pop_id=target_population.target_id where group_name LIKE '"+grpname.trim()+"'";
     
     conn.rs=conn.st.executeQuery(qr);
     
@@ -44,7 +44,11 @@ public class checkgroup extends HttpServlet {
     
          try {
        
-        out.println("yes");
+        //out.println("yes~"+conn.rs.getString(2)+"~"+conn.rs.getString(3));
+        out.println("<b> <font color='green'>"+conn.rs.getString(1)+" </font></b> group has already been added under <font color='green'> <b>"+conn.rs.getString(2)+"</b></font> partner and target population <font color='green'> <b>"+conn.rs.getString(3)+"<b> </font>. <i><font color='black'>                Change your group name slightly by adding a suffix of the partner name e.g.  </font> <font color='orange'>"+conn.rs.getString(1)+"-"+conn.rs.getString(2)+"</i></font>");
+        
+        
+        
       System.out.println("group already exists");
        
     } finally {            
@@ -52,6 +56,10 @@ public class checkgroup extends HttpServlet {
     }
     
     
+    }
+    else {
+    
+    out.println("");
     }
     
     

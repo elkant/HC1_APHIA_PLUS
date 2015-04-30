@@ -43,7 +43,10 @@ System.out.println(" Month is : "+month);
 
 
 
-String db_checker="SELECT * FROM member_details WHERE group_id='"+group+"' and year='"+year+"' and period='"+period+"' and month='"+month+"'";
+String db_checker="SELECT * FROM member_details WHERE group_id like '"+group+"' and year like '"+year+"' and period like '"+period+"' and month like '"+month+"'";
+
+              System.out.println(db_checker);
+              
 conn.rs=conn.st.executeQuery(db_checker);
 if(conn.rs.next()){
    leveler="found";

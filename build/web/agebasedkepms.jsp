@@ -43,9 +43,34 @@ Author     : SIXTYFOURBIT
                 
                 
 <title>Select Year and Period</title>
+
+ <style>
+            .targetpop{
+                
+                display: none;
+                
+            }
+            
+            </style>
+
+
 <script type="text/javascript">
     
-  
+   function showhidden(){
+
+      if(document.getElementById("usetargetpop").checked===true)
+         {
+       
+      //document.getElementsByClassName("targetpop").style.visibility='visible';
+      $('.targetpop').show();
+         }
+  else   {
+
+   //  document.getElementsByClassName("targetpop").style.visibility='hidden'; 
+     $('.targetpop').hide();
+          }
+      
+  }
      
     
 function get_years(){
@@ -165,8 +190,9 @@ document.getElementById("targetpop").innerHTML='<option value=\"\">loading targe
 <tr> <td class="align_button_right" style="width:300px;">Choose PEPFAR Year <font color="red">*</font></td>
 <td><Select name="year" id="year" class="textbox" onchange="targetsperyear();"   required ="true" style="width:200px;">
  <option value="">Choose Year</option> </select></td></tr>
-
-<tr> <td class="align_button_right" style="width:300px;">Choose Target Population <font color="red">*</font></td>
+<tr> <td class="align_button_right" style="width:300px;">Specify Target Population <i>(Optional)</i></td>
+<td><input type="checkbox" onclick="showhidden();"  id="usetargetpop" name="usetargetpop"></td></tr>
+<tr class="targetpop"> <td class="align_button_right" style="width:300px;">Choose Target Population <font color="red">*</font></td>
 <td><Select name="targetpop" id="targetpop" class="textbox6" style="width:200px;height:150px;" multiple >
  <option value="">all Target Populations</option> </select></td></tr>
 

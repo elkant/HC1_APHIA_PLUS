@@ -34,7 +34,7 @@ String dist=request.getParameter("distr");
 
 System.out.println("worked up to here"+pop_id);
 
-String grps_select="SELECT * FROM groups WHERE  district_id='"+dist+"' order by group_name";
+String grps_select="SELECT * FROM groups WHERE  district_id='"+dist+"' and target_pop_id='"+pop_id+"' order by group_name";
 conn.rs=conn.st.executeQuery(grps_select);
 while(conn.rs.next()){
     

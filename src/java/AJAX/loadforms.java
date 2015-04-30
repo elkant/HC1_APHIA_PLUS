@@ -38,6 +38,8 @@ public class loadforms extends HttpServlet {
     month=request.getParameter("month");
     year=request.getParameter("year");
     
+            System.out.println(" facils "+facilitatorids+"   month"+month+"  year "+month);
+    
     String facilitatorsAR[]=facilitatorids.split(",");
     
     String subqry="where  (";
@@ -70,6 +72,7 @@ public class loadforms extends HttpServlet {
     
     String getform="select distinct forms.form_id , form_number from register_attendance join forms on register_attendance.form_id=forms.form_id "+subqry+"";
     
+    System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"+getform);
     if(!subqry.equals("where  (")){
     
     conn.rs=conn.st.executeQuery(getform);

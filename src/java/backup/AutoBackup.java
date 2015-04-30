@@ -32,13 +32,13 @@ import javax.servlet.http.HttpSession;
 public class AutoBackup extends HttpServlet {
 HttpSession session;
 String today,path,ExistingPath,filePath,lastBackUp;
-int foundClients,foundRegister;
+
 dbConn conn=null;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         session=request.getSession();
          conn = new dbConn();
-        
+        int foundClients,foundRegister;
            //CREATE A PATH IN THE COMPUTER FOR STORING TEXT FILES
            IdGenerator IG = new IdGenerator();
            today=IG.toDay();
@@ -77,6 +77,8 @@ dbConn conn=null;
               }
              
             if(foundClients==0){
+                
+                
                 //             CHEK IF DATA HAS BEEN ENTERED=================================
               String checkRegister="SELECT COUNT(register_id) FROM register_attendance WHERE STR_TO_DATE(timestamp,'%Y-%m-%d')"
                       + " BETWEEN STR_TO_DATE('"+lastBackUp+"','%Y-%m-%d') AND STR_TO_DATE('"+today+"','%Y-%m-%d')";
@@ -92,6 +94,7 @@ dbConn conn=null;
           if(foundClients>0 || foundRegister>0){
               System.out.println("===================YOUR DATA WILL BE BACKED UP==================");
             PrintWriter out1 = response.getWriter();    
+            CreateBackup();
          out1.println("Backup created");     
            try {
    
@@ -100,7 +103,7 @@ dbConn conn=null;
     }    
               
               
-   CreateBackup(); 
+    
     
     
     
@@ -279,6 +282,7 @@ out.close();
                         File f = new File(current_drive + ":\\wamp\\mysql\\bin\\");
                         File f1 = new File(current_drive + ":\\wamp\\bin\\mysql\\mysql5.6.12\\bin");
                         File f2 = new File(current_drive + ":\\Program Files\\MySQL\\MySQL Server 5.5\\bin");
+                        File f4 = new File(current_drive + ":\\Program Files\\MySQL\\MySQL Server 5.6\\bin");
                         File f3 = new File(current_drive + ":\\APHIAPLUS\\HC_SYSTEM");
 
                         //     CREATE A DIRECTORY AND THE FILE TO HOLD DATA
@@ -300,7 +304,7 @@ out.close();
     // CHECK WHICH PROGRAM IS INSTALLED TO ENSURE THAT DATA IS BACKED UP SUCCESSFULLY.             
 
                         if (f.exists() && f.isDirectory()) {
-                            executeCmd = current_drive + ":\\wamp\\mysql\\bin\\mysqldump  --host=" + localhostsplit[0] + " --port=" + localhostsplit[1] + " --user=" + dbuser + " --password=" + dbpassword + " " + dbname + "   -r " + dbpath + "";
+                            executeCmd = current_drive + ":\\wamp\\mysql\\bin\\mysqldump --lock-tables=false  --host=" + localhostsplit[0] + " --port=" + localhostsplit[1] + " --user=" + dbuser + " --password=" + dbpassword + " " + dbname + "   -r " + dbpath + "";
     //executeCmd = "C:\\wamp3\\bin\\mysql\\mysql5.6.12\\bin\\mysqldump --no-create-info --skip-add-drop-table --host=localhost --user="+dbuser+" --password="+dbpassword+" "+dbname+" audit enrollment childage clientmember clientoccupation clientoparea dummy medical_form riskassessmentdetails riskassessmentmain riskreductionmain riskreductiondetails user taskauditor --where=timestamp>='"+startdate+"' -r "+dbpath+"";
 
                             found_folder1 = "it is old wamp";
@@ -308,11 +312,16 @@ out.close();
                         if (f1.exists() && f1.isDirectory()) {
 
 
-                            executeCmd = current_drive + ":\\wamp\\bin\\mysql\\mysql5.6.12\\bin\\mysqldump  --host=" + localhostsplit[0] + " --port=" + localhostsplit[1] + " --user=" + dbuser + " --password=" + dbpassword + " " + dbname + "  -r " + dbpath + "";
+                            executeCmd = current_drive + ":\\wamp\\bin\\mysql\\mysql5.6.12\\bin\\mysqldump --lock-tables=false  --host=" + localhostsplit[0] + " --port=" + localhostsplit[1] + " --user=" + dbuser + " --password=" + dbpassword + " " + dbname + "  -r " + dbpath + "";
                             found_folder1 = "it is new wamp";
                         }
                         if (f2.exists() && f2.isDirectory()) {
-                            executeCmd = current_drive + ":\\Program Files\\MySQL\\MySQL Server 5.5\\bin\\mysqldump  --host=" + localhostsplit[0] + " --port=" + localhostsplit[1] + " --user=" + dbuser + " --password=" + dbpassword + " " + dbname + "  -r " + dbpath + "";
+                            executeCmd = current_drive + ":\\Program Files\\MySQL\\MySQL Server 5.5\\bin\\mysqldump --lock-tables=false  --host=" + localhostsplit[0] + " --port=" + localhostsplit[1] + " --user=" + dbuser + " --password=" + dbpassword + " " + dbname + "  -r " + dbpath + "";
+                            found_folder1 = "it is workbench";
+                        }
+                        
+                        if (f4.exists() && f4.isDirectory()) {
+                            executeCmd = current_drive + ":\\Program Files\\MySQL\\MySQL Server 5.6\\bin\\mysqldump --lock-tables=false  --host=" + localhostsplit[0] + " --port=" + localhostsplit[1] + " --user=" + dbuser + " --password=" + dbpassword + " " + dbname + "  -r " + dbpath + "";
                             found_folder1 = "it is workbench";
                         }
                    

@@ -313,14 +313,11 @@ xmlhttp.onreadystatechange=function()
 if (xmlhttp.readyState==4 && xmlhttp.status==200)
 {
 var resp=xmlhttp.responseText; 
-if(resp.trim()=='yes'){
-document.getElementById("grpstatus").innerHTML="<b>"+grpname+"</b> group has already been added to the system! Change the group category to Existing group then select  <b>"+grpname+"</b>";
 
-}
-else{
- document.getElementById("grpstatus").innerHTML="";   
-    
-}
+   
+ document.getElementById("grpstatus").innerHTML=resp;
+   
+
 
 }
 }
@@ -506,7 +503,7 @@ if(session.getAttribute("isfacilsadded")!=null){
 <option value="1">Nakuru</option>
 <option value="3">Narok</option>
 
-</select></td>
+</select></td><td rowspan="6"><p id="grpstatus" style="color: red;background-color: white;"></p></td>
 
 
 </tr>   
@@ -530,7 +527,7 @@ if(session.getAttribute("isfacilsadded")!=null){
 <td><Select id="partner_name" class="textbox6"  required ="true" onchange="filter_target_pop(this);" name="partner_name" >
 
 <option value="">Choose partner</option>  
-</select></td><td><input type="hidden" id="hidden_partner" name="hidden_partner" /></td></tr>
+</select></td><td ><input type="hidden" id="hidden_partner" name="hidden_partner" /></td></tr>
 
 <tr> <td class="align_button_right">Target Population <font color="red">*</font></td>
 <td><Select id="target_pop" class="textbox6" onchange="filter_gr(this);"   required ="true" name="target_pop" >
@@ -573,7 +570,7 @@ if(session.getAttribute("isfacilsadded")!=null){
     <td class="align_button_right"><p id="newgname" style="display: none;">Enter Group Name <font color="red">*</font><p></td>
     <td><input type="text" style="display:none;"  oninput="checkgrpname();" id="newgroup_name" class="textbox"  required  name="newgroup_name" />
 
-</td><td><p id="grpstatus" style="color: red;background-color: white;"></p></td>
+</td>
 
 </tr>
 

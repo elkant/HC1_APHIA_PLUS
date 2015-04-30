@@ -674,6 +674,14 @@
         <servlet-name>AutoBackup</servlet-name>
         <servlet-class>backup.AutoBackup</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>grouploader2</servlet-name>
+        <servlet-class>AJAX.grouploader2</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>newagebasedkepms</servlet-name>
+        <servlet-class>reports.newagebasedkepms</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>add_district</servlet-name>
         <url-pattern>/add_district</url-pattern>
@@ -1345,6 +1353,14 @@
     <servlet-mapping>
         <servlet-name>AutoBackup</servlet-name>
         <url-pattern>/AutoBackup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>grouploader2</servlet-name>
+        <url-pattern>/grouploader2</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>newagebasedkepms</servlet-name>
+        <url-pattern>/newagebasedkepms</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>900000</session-timeout>
