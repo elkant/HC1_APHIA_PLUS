@@ -31,8 +31,24 @@ response.sendRedirect("index.jsp");
 <script type="text/javascript" src="js/noty/layouts/center.js"></script>
 <!-- You can add more layouts if you want -->
 <script type="text/javascript" src="js/noty/themes/default.js"></script>
+
+
+
+<style>
+    
+    td{
+        padding:4px;
+        
+    }   
+    
+</style>
+
 <title>Edit Facilitator</title>
 <script type="text/javascript">
+    
+    
+ 
+    
 function group_them(){
 var partner_id=document.getElementById("partner").value;
 var fname=document.getElementById("fname").value;
@@ -81,33 +97,45 @@ lname=request.getParameter("lname");
 phone=request.getParameter("phone");
 partner_name=request.getParameter("partner_name");
 groups=request.getParameter("groups");
+//groups=groups.replace(",","<br/>");
 partner_id=request.getParameter("partner_id");
 %>
 <form action="transfer_facilitator" name="" method="post">
-<table cellpadding="2px" cellspacing="3px" border="0px" >
-<br><br>
+<table cellpadding="4px" cellspacing="4px" border="0px" >
+<tr><td>
 First Name
-<br>
+</td><td>
 <input type="text" id="fname" name="fname" value="<%=fname%>" class="textbox" readonly="true" style="background: #cccccc">
 <input type="hidden" name="facilitator_id" id="facilitator_id" value="<%=facilitator_id%>" class="textbox">
-<br><br>
+</td></tr>
+<tr><td>
 Middle Name
-<br>
+</td><td>
 <input type="text" id="mname" name="mname" value="<%=mname%>" class="textbox" readonly="true" style="background: #cccccc">
-<br><br>
+</td></tr>
+<tr><td>
 Last Name
-<br>
+</td><td>
 <input type="text" id="lname" name="lname" value="<%=lname%>" class="textbox" readonly="true" style="background: #cccccc">
-<br><br>
+</td></tr>
+<tr><td>
 Phone Number
-<br>
+</td><td>
 <input type="text" id="phone" name="phone" value="<%=phone%>" class="textbox" readonly="true" style="background: #cccccc">
-<br><br>
-Partner<font color="red">*</font>
-<br>
-<input type="text" name="part" id="part"value="<%=partner_name%>" class="textbox" readonly="true"style="background: #cccccc">&nbsp;
-<input type="hidden" name="grp" id="grp"value="<%=groups%>" class="textbox" readonly="true"style="background: #cccccc"/>&nbsp;
-<select name="partner" id="partner" class="textbox1" onchange="return group_them();">
+</td></tr>
+<tr>
+<td>
+Current Partner<font color="red">*</font>
+</td>
+<td>
+<input type="text" name="part" id="part"value="<%=partner_name%>" class="textbox" readonly="true"style="background: #cccccc">
+<input type="hidden" name="grp" id="grp"value="<%=groups%>" class="textbox" readonly="true"style="background: #cccccc"/>
+</td></tr>
+<tr><td>
+Select New Partner
+</td><td>
+<select name="partner" style="width:225px;height:38px" id="partner" class="textbox1" onchange="return group_them();">
+   
 <option value="<%=partner_id%>"><%=partner_name%></option>
 <% String selector ="select * from partner where partner_id!='"+partner_id+"'";
 dbConn conn=new dbConn();
@@ -117,16 +145,23 @@ while(conn.rs.next()){
 <option value="<%=conn.rs.getString("partner_id")%>"><%=conn.rs.getString("partner_name")%></option>
 <%}%>
 </select>
-<br><br>
-Groups<font color="red">*</font>
-<br>
-<p style="background: #cccccc; width: 200px; height: 70px" class="textbox2" style=""><%=groups%></p>
-<p style="background: #006699; width: 200px; height: 70px" class="textbox3">
-<select name="groups" title="Ensure you press the control button before selecting a new group. THIS is to removing the facilitator from the current list of groups associated to." id="groups" class="textbox3" style="height:140px;" required="true" multiple>
+</td></tr>
+<tr><td> 
+Current Groups<font color="red">*</font>
+</td><td> 
+<p style="background: #cccccc; width: 200px; height: 70px;margin-left:0px;" class="textbox2" style=""><%=groups%></p>
+</td></tr>
+<tr>
+<td>Select Group</td><td>
+<select name="groups" title="Ensure you press the control button before selecting a new group. THIS is to removing the facilitator from the current list of groups associated to." id="groups" class="" style="" required="true" multiple>
 <option value=""></option>
 </select>
-</p>
+    
+</td></tr>
+<tr>
+<td>
 <input type="submit" name="sub" value="Save" class="textbox1" style="background: #cc99ff; color: #0000ff" >
+</td></tr>
 </table>
 <br><br>
 </form>
@@ -140,5 +175,7 @@ int year= cal.get(Calendar.YEAR);
 <p align="center"> &copy Aphia Plus | USAID <%=year%></p>
 </div>
 </div>
+
+
 </body>
 </html>
