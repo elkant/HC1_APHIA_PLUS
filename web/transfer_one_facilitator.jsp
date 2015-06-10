@@ -31,7 +31,11 @@ response.sendRedirect("index.jsp");
 <script type="text/javascript" src="js/noty/layouts/center.js"></script>
 <!-- You can add more layouts if you want -->
 <script type="text/javascript" src="js/noty/themes/default.js"></script>
+<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
 
+<link href="css/bootstrap-multiselect.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
 
 
 <style>
@@ -44,6 +48,16 @@ response.sendRedirect("index.jsp");
 </style>
 
 <title>Edit Facilitator</title>
+
+
+
+  <script type="text/javascript">
+        $(document).ready(function() {
+           
+        });
+    </script>
+
+
 <script type="text/javascript">
     
     
@@ -70,11 +84,26 @@ xmlhttp.onreadystatechange=function()
 if (xmlhttp.readyState==4 && xmlhttp.status==200)
 {
 document.getElementById("groups").innerHTML=xmlhttp.responseText;
+
+ $('#groups').multiselect({
+                includeSelectAllOption: true,
+                enableFiltering: true,
+                checkboxName: 'multiselect[]',
+                buttonWidth: '225px'
+            });
 }
 }
 xmlhttp.open("POST","group_loader?partner_id="+partner_id+"&fname="+fname+"&mname="+mname+"&lname="+lname+"&phone="+phone,true);
 xmlhttp.send();
 }
+
+
+
+
+
+
+
+
 </script>
 </head>
 <body onload="return group_them();">
@@ -86,8 +115,7 @@ xmlhttp.send();
 <div id="content" style="height:750px;">
 <div id="midcontent" style="margin-left:130px ;">
 <h4 style="background-color: orange">Edit Current Facilitator.</h4><br>
-<h2 style="background-color: greenyellow;">NB: Ensure you press the control button before selecting a new group. THIS is to avoid removing the facilitator from the current list of groups associated to.</h2>
-<br>
+
 <%
 String facilitator_id,fname,mname,lname,phone,partner_name,groups,partner_id;
 facilitator_id=request.getParameter("facilitator_id");
@@ -146,21 +174,16 @@ while(conn.rs.next()){
 <%}%>
 </select>
 </td></tr>
-<tr><td> 
-Current Groups<font color="red">*</font>
-</td><td> 
-<p style="background: #cccccc; width: 200px; height: 70px;margin-left:0px;" class="textbox2" style=""><%=groups%></p>
-</td></tr>
 <tr>
 <td>Select Group</td><td>
-<select name="groups" title="Ensure you press the control button before selecting a new group. THIS is to removing the facilitator from the current list of groups associated to." id="groups" class="" style="" required="true" multiple>
-<option value=""></option>
+<select name="groups"  id="groups" class="" style="width:220px;height:30px;" required="true"  multiple="multiple">
+<option value="">loading groups...</option>
 </select>
     
 </td></tr>
-<tr>
-<td>
-<input type="submit" name="sub" value="Save" class="textbox1" style="background: #cc99ff; color: #0000ff" >
+<tr><td></td>
+<td >
+<input type="submit" name="sub" value="Save"  style="background: #cc99ff; color: #0000ff;height:36px;width:120px;" >
 </td></tr>
 </table>
 <br><br>

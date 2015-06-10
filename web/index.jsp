@@ -228,7 +228,7 @@ String versionupdate="ALTER TABLE `version` ADD COLUMN `date` VARCHAR(45)  NULL 
                 conn.st1.executeUpdate(versionupdate);
                 
                   }
-         else { conn.st1.executeUpdate("update version set date='2015_01_12' ,version_name='HC1_VERSION_O1' ,updateslink='' where version_id='1' "); }
+         else { conn.st1.executeUpdate("update version set date='2015_06_09' ,version_name='HC1_VERSION_1.5' ,updateslink='' where version_id='1' "); }
 
 
 conn.rs=conn.st.executeQuery("select version_name , date from version");          

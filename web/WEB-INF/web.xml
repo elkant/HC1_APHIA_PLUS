@@ -682,6 +682,18 @@
         <servlet-name>newagebasedkepms</servlet-name>
         <servlet-class>reports.newagebasedkepms</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>loadward</servlet-name>
+        <servlet-class>AJAX.loadward</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>loadgroups</servlet-name>
+        <servlet-class>AJAX.loadgroups</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>newupdategroup</servlet-name>
+        <servlet-class>hc.newupdategroup</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>add_district</servlet-name>
         <url-pattern>/add_district</url-pattern>
@@ -1361,6 +1373,18 @@
     <servlet-mapping>
         <servlet-name>newagebasedkepms</servlet-name>
         <url-pattern>/newagebasedkepms</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loadward</servlet-name>
+        <url-pattern>/loadward</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loadgroups</servlet-name>
+        <url-pattern>/loadgroups</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>newupdategroup</servlet-name>
+        <url-pattern>/newupdategroup</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>900000</session-timeout>

@@ -39,13 +39,13 @@ lname=request.getParameter("lname");
 if(request.getParameter("phone")!=null){
 phone=request.getParameter("phone");
 }
-groups="<option value=\"\">Choose Group</option>";
+groups="";
 // if(!fname.equals("")&&fname!=null){
 //
 // selector="select * from groups where partner_id='"+partner_id+"' order by group_name ASC";
 //
 // }
-selector="select * from groups where partner_id='"+partner_id+"' order by group_name ASC";
+selector="select * from groups where partner_id='"+partner_id+"' order by group_name ASC ";
 conn.rs=conn.st.executeQuery(selector);
 while(conn.rs.next())
 {
@@ -61,7 +61,7 @@ if(conn.rs1.next()){
 groups=groups+"<option title=\""+conn.rs.getString("group_name") +"\" selected value=\""+conn.rs.getString("group_id") +"\">"+conn.rs.getString("group_name") +"</option>";
 }
 else{
-groups=groups+"<option title=\""+conn.rs.getString("group_name") +"\" value=\""+conn.rs.getString("group_id") +"\">"+conn.rs.getString("group_name") +"</option>";
+groups=groups+"<option title=\""+conn.rs.getString("group_name") +"\" value=\""+conn.rs.getString("group_id") +"\">"+conn.rs.getString("group_name").toLowerCase() +"</option>";
 }
 }
 System.out.println("here it is");

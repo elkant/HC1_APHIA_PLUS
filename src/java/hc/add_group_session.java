@@ -34,7 +34,11 @@ String prevpage="";
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
+        String ward="";
+        
        nextpage="FormWizard_facils.jsp"; 
+       
+       
        
        msg="";
        
@@ -61,7 +65,7 @@ String prevpage="";
    
          
      groups=request.getParameter("group_name");
-       System.out.println("SELECTED GROUP ID IS "+groups);
+       //System.out.println("SELECTED GROUP ID IS "+groups);
      
      }
      else{
@@ -69,18 +73,27 @@ String prevpage="";
      groups="";
      
      
-       System.out.println("GROUPS else"+groups);
+      // System.out.println("GROUPS else"+groups);
      }
    
-   System.out.println("Group Contains  "+groups);  
+   //System.out.println("Group Contains  "+groups);  
      
    //session.setAttribute("", out);  
    
    //set the sesion id
-   
+   String wardid[]=null;
      
+   if(request.getParameter("ward")!=null){
    
-     
+   ward=request.getParameter("ward");
+   wardid=ward.split(",");
+   session.setAttribute("wardid", wardid[0]);
+   session.setAttribute("wardname", wardid[1]);
+   }
+   
+   
+   
+    
      
      
      
@@ -89,7 +102,7 @@ String prevpage="";
        
      
 no_of_groups=request.getParameter("no_of_groups");
-}
+                                                  }
    
    if(request.getParameter("county")!=null){
   
@@ -123,6 +136,9 @@ period=request.getParameter("period");
 if(request.getParameter("prevpage")!=null){
 prevpage=request.getParameter("prevpage");
                                           }
+
+
+
 
 System.out.println("county: "+county_id);
 System.out.println("district: "+district);
@@ -159,6 +175,41 @@ session.setAttribute("county_id", county_id);
      dbConn conn= new dbConn();
      
      
+     //check if ward column exists in the group table
+     
+     String checkward="SELECT * FROM information_schema.COLUMNS WHERE   TABLE_SCHEMA = '"+conn.dbsetup[1]+"' AND TABLE_NAME = 'groups' AND COLUMN_NAME = 'wardid'";
+     
+     conn.rs=conn.st.executeQuery(checkward);
+     //if the column doesnt exist, then add it
+     if(!conn.rs.next()){
+     
+         String altertable="ALTER TABLE `groups` ADD COLUMN `wardid` VARCHAR(45) NULL DEFAULT 0 AFTER `timestamp`";
+         
+         conn.st.executeUpdate(altertable);
+     
+     }
+     
+   //now we are sure the ward column exists  
+     if(request.getParameter("grpcat")!=null){
+//if the group name exists, check the value of the ward in the database
+//if it has not been updated, update it.
+         if(request.getParameter("grpcat").equals("existing")){
+    String checkexistance="select wardid from groups where group_name='"+groupname+"' or group_id='"+groups+"' and wardid='0'";
+         conn.rs=conn.st.executeQuery(checkexistance);
+         
+         if(conn.rs.next()){
+         //update the ward id
+         
+             String updgroup=" update groups set wardid='"+session.getAttribute("wardid")+"' group_name='"+groupname+"' or group_id='"+groups+"'";
+             conn.st2.executeUpdate(updgroup);
+             System.out.println(updgroup);
+         }
+         
+         }
+}
+     
+     
+     
      conn.rs=conn.st.executeQuery("select * from groups where group_name='"+groupname+"' or group_id='"+groups+"'");
      
      //do this only when the group being added is one and the name is specified in wizard form..
@@ -177,7 +228,7 @@ session.setAttribute("county_id", county_id);
          
         
          
-         String qry="insert into groups(group_id,group_name,partner_id,target_pop_id,district_id) values('"+uniqid+"','"+groups+"','"+partner_id+"','"+target_pop+"','"+district_id+"')";
+         String qry="insert into groups(group_id,group_name,partner_id,target_pop_id,district_id,wardid) values('"+uniqid+"','"+groups+"','"+partner_id+"','"+target_pop+"','"+district_id+"','"+session.getAttribute("wardid")+"')";
      
          conn.st.executeUpdate(qry);
           
@@ -204,7 +255,7 @@ session.setAttribute("county_id", county_id);
 
 
 
-System.out.println("COUNTY ID ____SESSION"+session.getAttribute("county_id"));
+//System.out.println("COUNTY ID ____SESSION"+session.getAttribute("county_id"));
 
 //get partner name
 String selector="select * from partner where partner_id='"+partner_id+"'";
@@ -219,14 +270,14 @@ String selector3="select * from target_population where target_id='"+target_pop+
 conn.rs=conn.st.executeQuery(selector3);
 conn.rs.next();
 target_pop_name=conn.rs.getString("population_name").toString();
-System.out.println("inside the while: "+target_pop_name);
+//System.out.println("inside the while: "+target_pop_name);
 session.setAttribute("target_pop_name", target_pop_name);
 
 session.setAttribute("prevpage",prevpage);
 
 
 System.out.println("Target pop "+session.getAttribute("target_pop_name"));
-System.out.println("District "+session.getAttribute("district_name"));
+//System.out.println("District "+session.getAttribute("district_name"));
 System.out.println("Partner "+session.getAttribute("partner_name"));
 //add
 int noofgroups=0;

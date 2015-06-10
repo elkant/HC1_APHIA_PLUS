@@ -193,13 +193,13 @@ System.out.println("target population name is "+session.getAttribute("cc_target_
             for (int a = 1; a <= noofrows; a++) {
 
                 createdtable += "<tr><td>" + a + "</td>"
-                        + "<td class=\"align_button_left\"> <input type=\"text\" name=\"fname" + a + "\"  placeholder=\"First Name\" class=\"textbox1\" id=\"fname" + a + "\"/></td>"
+                        + "<td class=\"align_button_left\"> <input autofocus type=\"text\" name=\"fname" + a + "\"  placeholder=\"First Name\" class=\"textbox1\" id=\"fname" + a + "\"/></td>"
                         + "<td class=\"align_button_left\"><input type=\"text\" name=\"mname" + a + "\"  placeholder=\"Middle Name\" class=\"textbox1\" id=\"mname" + a + "\"/></td>"
                         + "<td class=\"align_button_left\"><input type=\"text\" name=\"lname" + a + "\"   placeholder=\"Last Name\" class=\"textbox1\" id=\"lname" + a + "\"/></td>"
                         + "<td class=\"align_button_left\"><select name=\"sex" + a + "\" class=\"textbox10\" id=\"sex" + a + "\" >"
                         + gen                       
                         + "</select></td>"
-                        + "<td class=\"align_button_left\"><input type=\"text\" onkeypress=\"return numbers(event)\" maxlength=\"2\" name=\"age" + a + "\"   placeholder=\"Age\" id=\"age" + a + "\" class=\"textbox1\" pattern=\"[0-9]{1,2}\" autofocus title=\"The field must have atleast 1 and atmost 2 Integers only\"/></td>"
+                        + "<td class=\"align_button_left\"><input type=\"text\" onblur='validateAge(\""+session.getAttribute("cc_target_pop")+"\",\"age"+a+"\");'  onkeypress=\"return numbers(event)\" maxlength=\"2\" name=\"age" + a + "\"   placeholder=\"Age\" id=\"age" + a + "\" class=\"textbox1\" pattern=\"[0-9]{1,2}\"  title=\"The field must have atleast 1 and atmost 2 Integers only\"/></td>"
                         + "</tr>";
 
             }
@@ -210,7 +210,7 @@ System.out.println("target population name is "+session.getAttribute("cc_target_
                     + " <tr align=\"center\" > <td class=\"align_button_left\" colspan=\"5\">"
                     + "<input type=\"hidden\" value=\"" + number_of_members + "\" name=\"noofrows\" id=\"noofrows\">"
                     + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type=\"reset\" name=\"submit\" value=\"Clear\" style=\"width:100px;height:35px;background-color:orange;\"></td>"
-                    + "<td>&nbsp;<input type=\"submit\" onmouseover=\"vali();\" name=\"submit\" value=\"Save and Continue\" style=\"width:130px;height:35px;background-color:orange;\"/></td></tr> ";
+                    + "<td>&nbsp;<input type=\"submit\"  name=\"submit\" value=\"Save and Continue\" style=\"width:130px;height:35px;background-color:orange;\"/></td></tr> ";
 
             session.setAttribute("memberscreatedtable", createdtable);
 

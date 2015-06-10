@@ -51,7 +51,7 @@ session=request.getSession();
            
            //add all the districts to the 
           
-           current_districts="<option value=\"\">Choose district</option>";
+           current_districts="<option value=\"\">Choose sub-county</option>";
            
            while(conn.rs.next()){
 if(session.getAttribute("district_id_rare")!=null&&session.getAttribute("district_id_rare").equals(conn.rs.getString("district_id"))){

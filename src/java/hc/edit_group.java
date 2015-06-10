@@ -30,7 +30,7 @@ String group_name,updater;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        String wardid="";
         updater="";
         
         PrintWriter out = response.getWriter();
@@ -45,6 +45,7 @@ String group_name,updater;
             dist=request.getParameter("district");
             String targetpopid=request.getParameter("targetpop");
             String partnerid=request.getParameter("partner");
+             wardid=request.getParameter("ward");
             String get_dets="SELECT * FROM groups WHERE group_id='"+session.getAttribute("group_id") +"'";
             conn.rs=conn.st.executeQuery(get_dets);
             if(conn.rs.next()==true){
@@ -67,14 +68,14 @@ String group_name,updater;
                     mdate = formatter.format(mydate);
                 
                 group_name=group_name.toUpperCase();
-            updater="update groups set group_name='"+group_name+"', district_id='"+dist+"', partner_id='"+partnerid+"',target_pop_id='"+targetpopid+"', timestamp='"+mdate+"' where group_id='"+session.getAttribute("group_id") +"'";
+            updater="update groups set group_name='"+group_name+"', wardid='"+wardid+"', district_id='"+dist+"', partner_id='"+partnerid+"',target_pop_id='"+targetpopid+"', timestamp='"+mdate+"' where group_id='"+session.getAttribute("group_id") +"'";
             conn.st.executeUpdate(updater);
             session.setAttribute("edit_group","<font color=\"green\">"+group_name+" Group details Edited successfully </font>");
             }
             if(found>0){
                  session.setAttribute("edit_group","<font color=\"red\">"+group_name+" group was not saved. This group already exist.</font>");
             }
-            response.sendRedirect("edit_group.jsp");
+            response.sendRedirect("neweditgroup.jsp");
         } finally {            
             out.close();
         }

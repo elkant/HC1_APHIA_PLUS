@@ -48,24 +48,84 @@ if(charCode > 31 && (charCode < 48 || charCode>57))
 return false;
 return true;
 }
+
+var errors=[];
+
+function validateAge(targetpop,age){
+    
+    if(targetpop=='FEMALES (15 to 24)'){
+        
+                    if((document.getElementById(age).value >=25||document.getElementById(age).value<=14)&&document.getElementById(age).value!=""){
+                        
+                        alert('Age of Partcipants for Females (15 to 24) should be between 15 to 24 years.');
+                        $("#"+age).css({'background-color' : 'red'}); 
+                        $("#"+age).focus(); 
+                       errors.push(age);
+                       // alert(errors.length);
+                        // document.getElementById(age).select();
+                    }
+                    else {
+                        
+                        $("#"+age).css({'background-color' : 'white'}); 
+                        
+                        
+                       if($.inArray(age, errors)>-1){
+                           
+                       var removeItem = age;
+
+errors = jQuery.grep(errors, function(value) {
+  return value != removeItem;
+                         });  
+                       } 
+                    }
+                    // alert(errors.length);
+                   
+        
+    }
+    
+   
+//check size now and show error if the errors array has elements
+
+
+    
+}
+
+
 //-->
 </script> 
         <script type="text/javascript">
             
             function vali(){
+                var ret=true;
+            
             for(var a=1;a<=parseInt(document.getElementById("noofrows").value);a++){
                 
                 if(newvali(a)==false){
+                    ret=false;
+                    break;
                     
+                }
+                else if(errors.length>0){
+                    
+                     ret=false;
+                     
+                      alert('The age fields marked in  red should be between 15 to 24 years.');
+                      $("#"+errors[0]).focus(); 
+                     
                     break;
                     
                 }
                 
+                else {
+                    
+                    ret= true;
+                }
             }
+            return ret;
             }
             
             function newvali(id){
-                
+                var returned=true;
             var fname=document.getElementById("fname"+id);
             var mname=document.getElementById("mname"+id);
             var lname=document.getElementById("lname"+id);
@@ -77,23 +137,23 @@ return true;
                     if(fname.value==""){
                         alert("Enter First name in row number " +id);
                         fname.focus();
-                        return false;}
-                    if(lname.value==""){
+                        returned= false;}
+                   else if(lname.value==""){
                         alert("Enter last name in row number " +id);
                         lname.focus();
-                        return false;}
-                    if(sex.value==""){
+                        returned= false;}
+                  else  if(sex.value==""){
                         alert("Select gender in row number " +id);
                         sex.focus();
-                        return false;}
-                    if(age.value==""){
+                        returned= false;}
+                   else if(age.value==""){
                         alert("Enter Age in row number " +id);
                         age.focus();
-                        return false;}
+                        returned= false;}
 
                 }
                
-                
+                return returned;
                
             }
             

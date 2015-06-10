@@ -32,7 +32,7 @@
 			<li><a href="#"> <img src="images/group.png"/> Edit Entries</a>
 				<ul>
 <!--                                    <li><a href="add_group.jsp"><span class="iconic plus-alt"></span>add group</a></li>-->
-					<li><a href="edit_group.jsp"><img src="images/edit.png"/>Edit Group</a></li>
+					<li><a href="neweditgroup.jsp"><img src="images/edit.png"/>Edit Group</a></li>
                                   <li><a href="edit_facilitatorbn"><img src="images/edit.png"/>Edit Facilitator</a></li>
                                   <li><a href="geMemDetails"><img src="images/edit.png"/>Edit  Participant</a></li>
                                 </ul>

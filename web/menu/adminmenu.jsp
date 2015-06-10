@@ -85,7 +85,7 @@ and open the template in the editor.
 				<ul>
                                    <li><a href="FormWizard.jsp">HC Form Entry</a></li>
 <!--                                    <li><a href="add_group.jsp"><span class="iconic plus-alt"></span>add group</a></li>-->
-					<li><a href="edit_group.jsp"><img src="images/edit.png"/>Edit Group</a></li>
+					<li><a href="neweditgroup.jsp"><img src="images/edit.png"/>Edit Group</a></li>
 <!--                                   <li><a href="add_facilitator.jsp"><span class="iconic plus-alt"></span>add facilitator</a></li>-->
 					<li><a href="edit_facilitatorbn"><img src="images/edit.png"/>Edit facilitator</a></li>
 <!--                                        <li><a href="filter_member.jsp"><span class="iconic plus-alt"></span>add a participant</a></li>-->

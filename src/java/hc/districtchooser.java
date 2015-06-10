@@ -36,8 +36,8 @@ public class districtchooser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            response.setContentType("text/html;charset=UTF-8");
-session=request.getSession();
+           response.setContentType("text/html;charset=UTF-8");
+           session=request.getSession();
            county_id=request.getParameter("county_id");
            System.out.println(county_id);
         //   System.out.println(" County:"+ county_name); 
@@ -51,7 +51,7 @@ session=request.getSession();
            
            //add all the districts to the 
           
-           current_districts="<option value=\"\">Choose district</option>";
+           current_districts="<option value=\"\">Choose sub-county</option>";
            
            while(conn.rs.next()){
 

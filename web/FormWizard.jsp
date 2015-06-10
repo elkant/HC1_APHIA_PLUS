@@ -75,7 +75,24 @@
 
 //manage drop down list for primary and secondary schools
 
+function loadward(){
+    
+        var dist=document.getElementById("district").value;
+            $.ajax({
+url:"loadward?dist="+dist,
+type:'post',
+dataType:'html',
+success:function (data){
+       $("#ward").html(data);
+        
+      // App.init();   
+                       }
 
+}); 
+    
+    
+    
+}
 
  
 
@@ -362,6 +379,7 @@ xmlhttp.send();
 <%
 
 dbConn1 con=new dbConn1();
+dbConn con1=new dbConn();
 if (!session.getAttribute("username").equals("m&e")&&!session.getAttribute("username").equals("joel")){
  String ch1 = "SHOW COLUMNS FROM mande_mail LIKE 'county'";
             con.rs = con.st.executeQuery(ch1);
@@ -435,9 +453,52 @@ if (session.getAttribute("username").equals("m&e")){
                 session.setAttribute("newmessage","<font color=\"orange\">New !! Please Update all the fields in this form before beginning any new activities</font>");
                        response.sendRedirect("update_sdm_email.jsp");
                        
-                       }}
+                            }}
 
 
+
+
+
+String wardexists="SHOW TABLES LIKE 'ward'";
+
+
+con1.rs=con1.st.executeQuery(wardexists);
+if(!con1.rs.next()){
+
+//now create the table
+    
+  con1.st1.executeUpdate("INSERT INTO `district` (`district_id`, `county_id`, `district_name`) VALUES ('3', '1', 'BAHATI')"); 
+  con1.st1.executeUpdate("CREATE TABLE `ward` (  `wardid` int(11) NOT NULL AUTO_INCREMENT,  `wardname` varchar(45) DEFAULT NULL,  `district_id` varchar(45) DEFAULT NULL,  PRIMARY KEY (`wardid`)) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8"); 
+  con1.st1.executeUpdate("INSERT INTO `ward` VALUES (1,'Dundori','3'),(2,'Kabatini','3'),(3,'Kiamaina','3'),(4,'Lanet/umoja','3'),(5,'Bahati','3'),(6,'Gilgil','4'),(7,'Kiptororo','5'),(8,'Nyota','5'),(9,'Sirikwa','5'),(10,'Kamara','5'),(11,'Amalo','5'),(12,'Keringet','5'),(13,'Kiptagich','5'),(14,'Tinet','5'),(15,'Mariashoni','6'),(16,'Elburgon','6'),(17,'Turi','6'),(18,'Molo','6'),(19,'Hells gate','7'),(20,'Lake view','7'),(21,'Mai mahiu','7'),(22,'Maiella','7'),(23,'Olkaria','7'),(24,'Naivasha east','7'),(25,'Viwandani','7'),(26,'Elementaita','7'),(27,'Mbaruk/eburu','7'),(28,'Malewa west','7'),(29,'Murindati','7'),(30,'Biashara','7'),(31,'Mau narok','10'),(32,'Mauche','10'),(33,'Kihingo','10'),(34,'Nessuit','10'),(35,'Lare','10'),(36,'Njoro','10'),(37,'Menengai west','11'),(38,'Soin','11'),(39,'Visoi','11'),(40,'Mosop','11'),(41,'Waseges','12'),(42,'Kabazi','12'),(43,'Narok Town','14'),(44,'Nanyuki','29'),(45,'Menengai','38'),(46,'Barut','38'),(47,'London','38'),(48,'Kaptembwo','38'),(49,'Kapkures','38'),(50,'Rhoda','38'),(51,'Shaabab','38'),(52,'Kivumbini','38'),(53,'Flamingo','38'),(54,'Nakuru east','38')"); 
+  System.out.println("inserting ward table"); 
+
+}
+
+
+//also check if wardid exists in groups
+ String ch3 = "SHOW COLUMNS FROM groups LIKE 'wardid'";
+            con1.rs = con1.st.executeQuery(ch3);
+            if (!con1.rs.next()) {
+           con1.st1.executeUpdate("ALTER TABLE groups ADD COLUMN wardid VARCHAR(45) NULL AFTER timestamp");
+           con1.st1.executeUpdate("UPDATE district SET district_name='NAKURU EAST' WHERE district_id='32'");
+           con1.st1.executeUpdate("UPDATE ward SET district_id='32' WHERE wardid='54'");
+           con1.st1.executeUpdate("UPDATE ward SET district_id='32' WHERE wardid='53'");         
+           con1.st1.executeUpdate("UPDATE ward SET district_id='32' WHERE wardid='52'");
+             
+
+         
+            }
+                      
+            
+            if(con1.rs!=null){con1.rs.close();}
+            if(con1.st!=null){con1.st.close();}
+            if(con1.st1!=null){con1.st1.close();}
+            
+               if(con.rs!=null){con.rs.close();}
+            if(con.st!=null){con.st.close();}
+            if(con.st1!=null){con.st1.close();}
+            
+            
 %>
 
 
@@ -448,7 +509,7 @@ if (session.getAttribute("username").equals("m&e")){
  <h3 style="text-align: center; background-color: orange;">Add/Select Group   PAGE 1/7</h3>
  <h5 style="text-align: center;"> </h5>
 
-<div id="content" style="height:510px;">
+<div id="content" style="height:530px;">
 
 
 <div id="midcontent" style="margin-left:130px ;">
@@ -514,12 +575,19 @@ if(session.getAttribute("isfacilsadded")!=null){
 
 
 <tr>  
-<td class="align_button_right">District<font color="red">*</font></td>
-<td><Select id="district" class="textbox6"  required ="true" onchange="filter_partner(this);" name="district" >
+<td class="align_button_right">Sub-County<font color="red">*</font></td>
+<td><Select id="district" class="textbox6"  required ="true" onchange="filter_partner(this);loadward();" name="district" >
 
-<option value="">Choose District</option>  
+<option value="">Choose Sub-county</option>  
 </select></td><td></td></tr>
 
+
+<tr>  
+<td class="align_button_right">Ward<font color="red">*</font></td>
+<td><Select id="ward" class="textbox6"  required ="true" onchange="" name="ward" >
+
+<option value="">Choose Ward</option>  
+</select></td><td></td></tr>
 
 
 <tr>  
@@ -540,7 +608,7 @@ if(session.getAttribute("isfacilsadded")!=null){
 
 
 <tr> <td class="align_button_right">Group Category<font color="red">*</font></td>
-<td><Select id="grpcat" class="textbox6" onchange="grptype(this);"   required ="true" name="target_pop" >
+<td><Select id="grpcat" class="textbox6" onchange="grptype(this);"   required ="true" name="grpcat" >
 
 <option value="">category</option>  
 <option value="new">New Group</option>  

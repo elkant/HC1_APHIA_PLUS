@@ -189,7 +189,7 @@ if(!conn.rs_5.next()){
 
 //set maximum concurrent connectiosn to be 1500
             
-            String maxconn="set @@global.max_connections=1550";
+            String maxconn="set @@global.max_connections=6000";
             
             conn.st.executeUpdate(maxconn);
 
@@ -350,12 +350,20 @@ if(!conn.rs_5.next()){
 
 
 
-
+  if(conn.rs!=null){conn.rs.close();}   
+  if(conn1.rs!=null){conn1.rs.close();}   
+  if(conn.st!=null){conn.st.close();}   
+  if(conn.st3!=null){conn.st3.close();}   
+  if(conn1.st!=null){conn1.st.close();}   
+  if(conn.st_5!=null){conn.st_5.close();}   
+  if(conn.rs_5!=null){conn.rs_5.close();}   
 
 
 
 
         } finally {
+       
+            
             out.close();
         }
     }

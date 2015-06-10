@@ -83,6 +83,28 @@
             
             }  
         
+        
+        
+        function loadward(){
+    
+        var dist=document.getElementById("district").value;
+            $.ajax({
+url:"loadward?dist="+dist,
+type:'post',
+dataType:'html',
+success:function (data){
+       $("#ward").html(data);
+        
+      // App.init();   
+                       }
+
+}); 
+    
+    
+    
+}
+        
+        
           function filter_districts(){
 
                 var county_id=document.getElementById("countysel").value;        
@@ -111,6 +133,7 @@
                         document.getElementById("district").innerHTML=xmlhttp.responseText;
                         
                         filter_partner();
+                        loadward();
                     }
                 }
                 xmlhttp.open("POST","districtchooser1?county_id="+county_id,true);
@@ -241,27 +264,29 @@ out.println(message1);
      
 <table cellpadding="4" style="width:400px;" cellspacing="6"> <br/>
         <tr>
-<td> New County:</td><td><select style="width:200px;" onchange="filter_districts();" class="textbox10" name="countysel" required id="countysel"><option value="">select county</option> </select></td></tr>
+<td style="text-align: right;"><b> New County:</b></td><td><select style="width:200px;" onchange="filter_districts();" class="textbox10" name="countysel" required id="countysel"><option value="">select county</option> </select></td></tr>
     <tr>
         
             <tr>
-                <td> New District:</td><td><select style="width:200px;" onchange="filter_partner();" required class="textbox10" name="district" id="district"><option value="">select district</option> </select></td></tr>
+                <td style="text-align: right;"> <b>New Sub-county:</b></td><td><select style="width:200px;" onchange="filter_partner();loadward();" required class="textbox10" name="district" id="district"><option value="">select sub-county</option> </select></td></tr>
 
-        
-<td> New Partner:</td><td><select style="width:200px;" class="textbox10" name="partner" onchange="filter_target_pop();" required id="partner"><option value="">select partner</option> </select></td></tr>
+ <tr>
+                <td style="text-align: right;"><b> New Ward:</b></td><td><select style="width:200px;"   class="textbox10" name="ward" id="ward"><option value="">select ward</option> </select></td></tr>
+       
+<td style="text-align: right;"> <b>New Partner:</b></td><td><select style="width:200px;" class="textbox10" name="partner" onchange="filter_target_pop();" required id="partner"><option value="">select partner</option> </select></td></tr>
     <tr>
-<td>New Target Population:</td><td><select style="width:200px;" class="textbox10" required name="targetpop" id="targetpop"><option value="">select target population</option> </select></td></tr>
+<td style="text-align: right;"><b>New Target Population:</b></td><td><select style="width:200px;" class="textbox10" required name="targetpop" id="targetpop"><option value="">select target population</option> </select></td></tr>
 
     
     
 
- <tr><td>
+ <tr><td style="text-align: right;">
 
-Group Name:
+<b>Group Name:</b>
 
 </td>
 <td>
-<input type="text" name="group_name" value="<%=session.getAttribute("group_name")%>" class="textbox"/>
+<input style="width:200px;" required type="text" name="group_name" value="<%=session.getAttribute("group_name")%>" class="textbox"/>
 </td>
 
 </tr>
