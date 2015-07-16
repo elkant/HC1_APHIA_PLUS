@@ -694,6 +694,18 @@
         <servlet-name>newupdategroup</servlet-name>
         <servlet-class>hc.newupdategroup</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>datim</servlet-name>
+        <servlet-class>reports.datim</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>datim_age</servlet-name>
+        <servlet-class>reports.datim_age</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>uniquetargetpops2s</servlet-name>
+        <servlet-class>AJAX.uniquetargetpops2s</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>add_district</servlet-name>
         <url-pattern>/add_district</url-pattern>
@@ -1385,6 +1397,18 @@
     <servlet-mapping>
         <servlet-name>newupdategroup</servlet-name>
         <url-pattern>/newupdategroup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>datim</servlet-name>
+        <url-pattern>/datim</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>datim_age</servlet-name>
+        <url-pattern>/datim_age</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>uniquetargetpops2s</servlet-name>
+        <url-pattern>/uniquetargetpops2s</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>900000</session-timeout>

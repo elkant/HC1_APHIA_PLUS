@@ -271,7 +271,7 @@ out.println(message1);
                 <td style="text-align: right;"> <b>New Sub-county:</b></td><td><select style="width:200px;" onchange="filter_partner();loadward();" required class="textbox10" name="district" id="district"><option value="">select sub-county</option> </select></td></tr>
 
  <tr>
-                <td style="text-align: right;"><b> New Ward:</b></td><td><select style="width:200px;"   class="textbox10" name="ward" id="ward"><option value="">select ward</option> </select></td></tr>
+  <td style="text-align: right;"><b> New Ward:</b></td><td><select style="width:200px;"   class="textbox10" name="ward" id="ward"><option value="">select ward</option> </select></td></tr>
        
 <td style="text-align: right;"> <b>New Partner:</b></td><td><select style="width:200px;" class="textbox10" name="partner" onchange="filter_target_pop();" required id="partner"><option value="">select partner</option> </select></td></tr>
     <tr>

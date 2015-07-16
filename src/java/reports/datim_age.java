@@ -34,73 +34,72 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author Manuel
  */
-public class newagebasedkepms extends HttpServlet {
+public class datim_age extends HttpServlet {
 
-
+  
     int maxmerging=0;
     String maincountqry="";
     String year="";
     String targetpop ="";
-    String pathtodelete=null;
+    
+String pathtodelete=null;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            XSSFWorkbook wb;
-        
         try {
             response.setContentType("text/html;charset=UTF-8");
 
- String allpath = getServletContext().getRealPath("/Females 15to24.xlsm");
+ String allpath = getServletContext().getRealPath("/datim_age.xlsm");
 
  System.out.println(allpath);
- 
-    XSSFWorkbook workbook;
-      String mydrive = allpath.substring(0, 1);
-   // wb = new XSSFWorkbook( OPCPackage.open(allpath) );
-     
- Date da= new Date();
+   XSSFWorkbook wb;
+    
+    Date da= new Date();
 String dat2 = da.toString().replace(" ", "_");
  dat2 = dat2.toString().replace(":", "_");
-
-      
-       String np=mydrive+":\\APHIAPLUS\\HC_SYSTEM\\MACROS\\Females"+dat2+".xlsm";
-     
-             // String desteepath1 = getServletContext().getRealPath("/Females 15to24.xlsm");
-              String sr = getServletContext().getRealPath("/Females 15to24.xlsm");
-    //check if file exists
-              
-   //first time , it should create those folders that host the macro file
-    File f = new File(np);
-if(!f.exists()&& !f.isDirectory() ) { /* do something */
-copytemplates ct= new copytemplates();
-    ct.transfermacros(sr,np);
- //rem np is the destination file name  
    
-    System.out.println("Copying macros first time ..");
+    String mydrive = allpath.substring(0, 1);
+    
+    String np=mydrive+":\\APHIAPLUS\\HC_SYSTEM\\MACROS\\datim_age_"+dat2+".xlsm";
+    //check if file exists
+     String sourcepath = getServletContext().getRealPath("/datim_age.xlsm");
+             
+    File f = new File(np);
+if(!f.exists()&& !f.isFile() ) {
+/* do something */
+    
+copytemplates ct= new copytemplates();
+System.out.println("Copying macros..");
+ct.transfermacros(sourcepath,np);
     
 }
 else 
   //copy the file alone  
 {
+    
 copytemplates ct= new copytemplates();
 //copy the agebased file only
-ct.copymacros(sr,np);
+ct.copymacros(sourcepath,np);
 
 }
-String filepth=np;      
+    
 
-  File allpathfile= new File(filepth);
+
+  File allpathfile= new File(np);
      
       OPCPackage pkg = OPCPackage.open(allpathfile);
-
-            pathtodelete=filepth;
-    wb = new XSSFWorkbook(pkg);
-
-   String columnheaders[]={"PARTICIPANT","SEX","AGE_BRACKET","PARTNER","TARGET_POPULATION","MONTHS","YEAR","COUNTY"};
+ 
+      pathtodelete=np;
+    
+    
+    //wb = new XSSFWorkbook( OPCPackage.open(allpath) );
+    wb = new XSSFWorkbook(pkg );
+System.out.println("excel file now open");
+   String columnheaders[]={"PARTICIPANT","AGE_BRACKET","SEX","QUARTER","PARTNER","TARGET_POPULATION","YEAR","COUNTY","SUB_COUNTY","WARD"};
         
   //  PARTICIPANT	SEX	AGE_BRACKET	PARTNER	TARGET_POPULATION	MONTHS	YEAR	COUNTY
 
-    XSSFSheet rawdata = wb.getSheet("Sheet1");
+    XSSFSheet rawdata = wb.getSheet("datim_age");
 
 
             //%%%%%%%%%%%%%%%%HEADER FONTS AND COLORATION%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -177,7 +176,7 @@ String filepth=np;
             String targetpopulation[]=request.getParameterValues("targetpop");
            
             String targetqr="";
-       if(targetpopulation!=null){
+       if(targetpopulation!=null ){
         if(targetpopulation.length>0){ 
             if(targetpopulation[0].equals("")&&targetpopulation.length==1){
             
@@ -201,7 +200,7 @@ String filepth=np;
             
             
             targetpop="FEMALES (15 to 24)";
-            year="2014";
+            year="2015";
             
             if(request.getParameter("year")!=null){
             year = request.getParameter("year");}
@@ -210,47 +209,42 @@ String filepth=np;
 int yr=0;
 int prevyr=0;
 
+String period[]=request.getParameterValues("quarter");
+String quarterqr="";
+
+if(period.length>0){ 
+       quarterqr=" and (";
+           for(int a=0;a<period.length;a++){
+           
+           quarterqr+=" member_details.period='"+period[a]+"'";
+           
+           if(a<period.length-1&&period.length!=1){quarterqr+=" OR ";}
+           
+           }
+            quarterqr+=" ) ";
+       
+       }
+
 
 yr=Integer.parseInt(year);
 prevyr=yr-1; 
 
- 
-    String qry="SELECT count(member_details.member_id) as PARTICIPANT,"
-
+String qry="SELECT count(member_details.member_id) as PARTICIPANT,"
++" case "
++" when age between 10 and 14 then '10-14'"
++" when age between 15 and 19 then '15-19'"
++" when age between 20 and 24 then '20-24'"
++" when age between 25 and 49 then '25-49' else '50+'"
++" end as AGE_BRACKET, "
 +" CASE "
 +" when SEX LIKE 'female' THEN 'F'"
 +" when SEX LIKE 'male' THEN 'M'"
 +" ELSE 'NO SEX'"
 +" END AS SEX,"
-+" case "
-+" when age between 10 and 14 then '10-14'"
-+" when age between 15 and 19 then '15-19'"
-+" when age between 20 and 24 then '20-24'"
-+" when age between 25 and 49 then '25-49'"
-+" end as AGE_BRACKET "
-+" , partner_name as PARTNER,population_name as TARGET_POPULATION,"
-
-            
-            
-            
-
-+" case "
-+" when MONTH =1 THEN '"+yr+" (1) JAN'"
-+" when MONTH =2 THEN '"+yr+" (2) FEB'"
-+" when MONTH =3 THEN '"+yr+" (3) MAR'"
-+" when MONTH=4 THEN '"+yr+" (4) APR'"
-+" when MONTH=5 THEN '"+yr+" (5) MAY'"
-+" when MONTH=6 THEN '"+yr+" (6) JUN'"
-+" when MONTH=7 THEN '"+yr+" (7) JUL'"
-+" when MONTH=8 THEN '"+yr+" (8) AUG'"
-+" when MONTH=9 THEN '"+yr+" (9) SEP'"
-+" when MONTH=10 THEN '"+prevyr+" (10) OCT'"
-+" when MONTH=11 THEN '"+prevyr+" (11) NOV'"
-+" when MONTH=12 THEn '"+prevyr+" (12) DEC'"
-+" END AS MONTHS"
-
-+" ,year as YEAR,Upper(county_name) as COUNTY  "
-+" FROM groups "
++" case when period like '1' THEN 'OCT-DEC' when period like '2' THEN 'JAN-MAR' when period like '3' THEN 'APR-JUN' when period like '4' THEN 'JUL-SEP'" +
+" end  as QUARTER "
++" , partner_name as PARTNER,population_name as TARGET_POPULATION ,year as YEAR,Upper(county_name) as COUNTY  , district_name as SUB_COUNTY, upper(wardname) as WARD"
++ " FROM groups left join ward on groups.wardid=ward.wardid "
 +" join member_details on member_details.group_id=groups.group_id "
 +" join target_population on groups.target_pop_id=target_population.target_id"
 +" join district on groups.district_id=district.district_id"
@@ -258,11 +252,13 @@ prevyr=yr-1;
 +" join curriculum on groups.target_pop_id=curriculum.target_id,county"
 +" where district.county_id=county.county_id"  
 +" and  sex !='' and sessions_attended >0 "
-+" and age>='10' and age <=49 and sessions_attended=no_of_lessons  "
-+" and YEAR='"+year+"' "+targetqr  
-+" group by PARTNER,TARGET_POPULATION,COUNTY,SEX,AGE_BRACKET,MONTHS"  
-
++" and sessions_attended=no_of_lessons  "
++" and YEAR='"+year+"' "+targetqr +quarterqr 
++" group by  COUNTY,PARTNER,TARGET_POPULATION,QUARTER,SEX,WARD,AGE_BRACKET"
 +" order by  PARTNER,TARGET_POPULATION,SEX DESC";
+    
+    
+    
     
     
     
@@ -350,14 +346,31 @@ prevyr=yr-1;
             cell7.setCellValue(conn.rs.getInt(7));
           //  cell7.setCellStyle(innerdata_style);
             
-            //County
+      
+         //Year
             XSSFCell cell8 = rw2.createCell(7);
             cell8.setCellValue(conn.rs.getString(8));
-          //  cell8.setCellStyle(innerdata_style);
-            //districtid
+          //  cell7.setCellStyle(innerdata_style);
            
+           
+            XSSFCell cell9 = rw2.createCell(8);
+            cell9.setCellValue(conn.rs.getString(9));
+          //  cell7.setCellStyle(innerdata_style); 
+           
+             //Ward
             
+            String ward="No ward";
+                    System.out.println("~~~ WARD IS "+conn.rs.getString(10));
+            if(conn.rs.getString(10)!=null){
+                if(!conn.rs.getString(10).trim().equals("")){
+                ward=conn.rs.getString(10);
+                }
+                }
            
+             XSSFCell cell10 = rw2.createCell(9);
+            cell10.setCellValue(ward);
+          //  cell7.setCellStyle(innerdata_style);
+            
             
                 }
          
@@ -378,14 +391,13 @@ prevyr=yr-1;
         response.setContentType("application/ms-excel");
         response.setContentLength(outArray.length);
         response.setHeader("Expires:", "0"); // eliminates browser caching
-        response.setHeader("Content-Disposition", "attachment; filename=kepms_format_age_brackets_report" + dat1 + ".xlsm");
+        response.setHeader("Content-Disposition", "attachment; filename=datim_s2s_age_brackets_" + dat1 + ".xlsm");
         OutputStream outStream = response.getOutputStream();
         outStream.write(outArray);
         outStream.flush();
         pkg.close();
-        
        // response.sendRedirect("index.jsp");
-        
+           
          File file= new File(pathtodelete);
         
         if(file.delete()){
@@ -396,9 +408,12 @@ prevyr=yr-1;
 
         
         
-            
+        
         } catch (InvalidFormatException ex) {
             Logger.getLogger(agebasedkepms.class.getName()).log(Level.SEVERE, null, ex);
+            
+            
+            
         } catch (SQLException ex) {
             Logger.getLogger(agebasedkepms.class.getName()).log(Level.SEVERE, null, ex);
         }

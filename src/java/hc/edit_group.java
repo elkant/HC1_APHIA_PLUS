@@ -68,7 +68,17 @@ String group_name,updater;
                     mdate = formatter.format(mydate);
                 
                 group_name=group_name.toUpperCase();
-            updater="update groups set group_name='"+group_name+"', wardid='"+wardid+"', district_id='"+dist+"', partner_id='"+partnerid+"',target_pop_id='"+targetpopid+"', timestamp='"+mdate+"' where group_id='"+session.getAttribute("group_id") +"'";
+                
+                String wardiid="";   
+         
+      if(wardid.contains(",")){
+      String wardi[]=wardid.split(",");
+      wardiid=wardi[0];
+      
+      }  
+                
+                
+            updater="update groups set group_name='"+group_name+"', wardid='"+wardiid+"', district_id='"+dist+"', partner_id='"+partnerid+"',target_pop_id='"+targetpopid+"', timestamp='"+mdate+"' where group_id='"+session.getAttribute("group_id") +"'";
             conn.st.executeUpdate(updater);
             session.setAttribute("edit_group","<font color=\"green\">"+group_name+" Group details Edited successfully </font>");
             }

@@ -64,8 +64,8 @@ else{
 groups=groups+"<option title=\""+conn.rs.getString("group_name") +"\" value=\""+conn.rs.getString("group_id") +"\">"+conn.rs.getString("group_name").toLowerCase() +"</option>";
 }
 }
-System.out.println("here it is");
-out.println("<h1>"+groups+"</h1>");
+//System.out.println("here it is");
+out.println(groups);
 } finally {
 out.close();
 }

@@ -78,7 +78,9 @@
                    <li><a href="agebasedkepms.jsp"><font color="red">kepms report by age (excel)</font></a></li>
                    <li><a href="newagebasedkepms.jsp"><font color="red">(New) kepms report by age (excel)</font></a></li>
             <li><a href="partnerbasedreport.jsp"><font color="red">Kepms report by Target Pop. (excel)</font></a></li>
-               
+            <li><a href="datimreport_noage.jsp"><font color="red">Datim report per quarter (excel)</font></a></li>
+             <li><a href="datimreport_age.jsp"><font color="red">Datim report per age bracket (excel)</font></a></li>
+              
                   <li><a href="overall_target_bar.jsp">Target Populations Completion Rates (bar)</a></li>
                   <li><a href="kePMS_bar.jsp">PEPFAR Report (bar)</a></li>
                   <li><a href="county_bar.jsp">County Completion Rate (bar)</a></li>

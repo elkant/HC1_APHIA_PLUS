@@ -92,10 +92,6 @@ String prevpage="";
    }
    
    
-   
-    
-     
-     
      
      
    if(request.getParameter("no_of_groups")!=null){
@@ -199,8 +195,17 @@ session.setAttribute("county_id", county_id);
          
          if(conn.rs.next()){
          //update the ward id
+             
+             String wardiid="";   
          
-             String updgroup=" update groups set wardid='"+session.getAttribute("wardid")+"' group_name='"+groupname+"' or group_id='"+groups+"'";
+      if(session.getAttribute("wardid")!=null){
+      String wardi[]=session.getAttribute("wardid").toString().split(",");
+      wardiid=wardi[0];
+      
+      }  
+      
+         
+             String updgroup=" update groups set wardid='"+wardiid+"' group_name='"+groupname+"' or group_id='"+groups+"'";
              conn.st2.executeUpdate(updgroup);
              System.out.println(updgroup);
          }
@@ -224,20 +229,24 @@ session.setAttribute("county_id", county_id);
      
      //insert the group name afresh
      else{
+      String wardiid="";   
          
+      if(session.getAttribute("wardid")!=null){
+      String wardi[]=session.getAttribute("wardid").toString().split(",");
+      wardiid=wardi[0];
+      
+      }  
          
-        
-         
-         String qry="insert into groups(group_id,group_name,partner_id,target_pop_id,district_id,wardid) values('"+uniqid+"','"+groups+"','"+partner_id+"','"+target_pop+"','"+district_id+"','"+session.getAttribute("wardid")+"')";
+         String qry="insert into groups(group_id,group_name,partner_id,target_pop_id,district_id,wardid) values('"+uniqid+"','"+groups+"','"+partner_id+"','"+target_pop+"','"+district_id+"','"+wardiid+"')";
      
-         conn.st.executeUpdate(qry);
+    conn.st.executeUpdate(qry);
           
-       session.setAttribute("added_group_id",uniqid);
-     msg="<font color=\"green\">"+groups+"  added successfully.Choose next to add a facilitator and a core facilitator </font>";
+    session.setAttribute("added_group_id",uniqid);
+    msg="<font color=\"green\">"+groups+"  added successfully.Choose next to add a facilitator and a core facilitator </font>";
      
-      session.setAttribute("grpmsg", msg);
+    session.setAttribute("grpmsg", msg);
      
-     nextpage="FormWizard_facils.jsp";
+    nextpage="FormWizard_facils.jsp";
      
      }
      }

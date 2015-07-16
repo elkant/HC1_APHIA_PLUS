@@ -59,7 +59,7 @@ $( "#accordion" ).accordion();
             <div id="content">
                  <!--- NOW CHECK THE UPDATES  --->
                  <%
-                            if (1==1)  { %>
+                            if (1==2)  { %>
                                 <script type="text/javascript"> 
                     
                     
@@ -220,7 +220,7 @@ Calendar cal = Calendar.getInstance();
 int year= cal.get(Calendar.YEAR);  
 dbConn conn=new dbConn();
 
-String versionupdate="ALTER TABLE `version` ADD COLUMN `date` VARCHAR(45)  NULL DEFAULT  '2015_01_12'  AFTER `version_name` , ADD COLUMN `updateslink` VARCHAR(45)  NULL DEFAULT  'HC1_VERSION_01'  AFTER `date` ";
+String versionupdate="ALTER TABLE `version` ADD COLUMN `date` VARCHAR(45)  NULL DEFAULT  '2015_07_10'  AFTER `version_name` , ADD COLUMN `updateslink` VARCHAR(45)  NULL DEFAULT  'HC1_VERSION_1.6'  AFTER `date` ";
  String ch1 = "SHOW COLUMNS FROM version LIKE 'date'";
             conn.rs = conn.st.executeQuery(ch1);
             if (!conn.rs.next()) {
@@ -228,7 +228,7 @@ String versionupdate="ALTER TABLE `version` ADD COLUMN `date` VARCHAR(45)  NULL 
                 conn.st1.executeUpdate(versionupdate);
                 
                   }
-         else { conn.st1.executeUpdate("update version set date='2015_06_09' ,version_name='HC1_VERSION_1.5' ,updateslink='' where version_id='1' "); }
+         else { conn.st1.executeUpdate("update version set date='2015_07_10' ,version_name='HC1_VERSION_1.6' ,updateslink='' where version_id='1' "); }
 
 
 conn.rs=conn.st.executeQuery("select version_name , date from version");          

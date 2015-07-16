@@ -134,12 +134,14 @@ public class RawData extends HttpServlet {
 +" member_details.year as YEAR,"
 +" member_details.period as QUARTER,"
 +" CONCAT(UPPER(facilitator_details.first_name),\" \",UPPER(facilitator_details.sur_name),\"(\",phone,\")\") as FACILITATOR "
-+ ",new_topic.start_date as STARTDATE, new_topic.end_date as END_DATE ,form_number as FORM ,curriculum_name as CURRICULUM "
++ ",new_topic.start_date as STARTDATE, new_topic.end_date as END_DATE ,form_number as FORM ,curriculum_name as CURRICULUM,wardname as WARD "
 +" FROM groups "
+
 +" join member_details on member_details.group_id=groups.group_id "
 +" join target_population on groups.target_pop_id=target_population.target_id "
 +" join district on groups.district_id=district.district_id "
 +" join partner on groups.partner_id=partner.partner_id "
++ "left join ward on groups.wardid = ward.wardid"
 +" join curriculum on groups.target_pop_id=curriculum.target_id,county,register_attendance, facilitator_details,new_topic,forms "
 +" where district.county_id=county.county_id "
 +" and member_details.member_id=register_attendance.member_id "
@@ -154,7 +156,7 @@ public class RawData extends HttpServlet {
        
       conn.rs=conn.st.executeQuery(querydata);
        
-       String columnheaders[]={"PARTICIPANT","GROUPNAME","AGE","SEX","DISTRICT","COUNTY","PARTNER","TARGET_POPULATION","SESSIONS_ATTENDED","EXPECTED_SESSION","MONTH","YEAR","QUARTER","FACILITATOR","START DATE","END DATE","FORM NO.","CURRICULUM"};
+       String columnheaders[]={"PARTICIPANT","GROUPNAME","AGE","SEX","DISTRICT","COUNTY","PARTNER","TARGET_POPULATION","SESSIONS_ATTENDED","EXPECTED_SESSION","MONTH","YEAR","QUARTER","FACILITATOR","START DATE","END DATE","FORM NO.","CURRICULUM","WARD"};
         
         
         //HSSFSheet worksheet = wb.createSheet("HC1 RAW DATA");
@@ -360,6 +362,10 @@ public class RawData extends HttpServlet {
             //curriculum
                   XSSFCell cell18 = rw2.createCell(17);
             cell18.setCellValue(conn.rs.getString(18));
+            
+            
+            XSSFCell cell19 = rw2.createCell(18);
+            cell19.setCellValue(conn.rs.getString(19));
             }          
                 
                 

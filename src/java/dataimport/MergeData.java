@@ -234,10 +234,17 @@ String existancechecker = "select * from facilitator_details where facilitator_i
 
             while (conn.rs.next()) {
 
+                String wardid=conn.rs.getString(7);
+              if(wardid.contains(",")){ 
+              String wards[]=wardid.split(",");
+              wardid=wards[0];
+                  
+              }  
+                
                 String existancechecker = "select * from groups where group_id='" + conn.rs.getString(1) + "'";
 
                 String insertdata = "insert into groups(group_id,group_name,partner_id,target_pop_id,district_id,timestamp,wardid) "
-                        + "values ('" + conn.rs.getString(1) + "','" + conn.rs.getString(2) + "','" + conn.rs.getString(3) + "','" + conn.rs.getString(4) + "','" + conn.rs.getString(5) + "','" + conn.rs.getString(6) + "','" + conn.rs.getString(7) + "')";
+                        + "values ('" + conn.rs.getString(1) + "','" + conn.rs.getString(2) + "','" + conn.rs.getString(3) + "','" + conn.rs.getString(4) + "','" + conn.rs.getString(5) + "','" + conn.rs.getString(6) + "','" + wardid + "')";
 
 
 
@@ -251,7 +258,7 @@ String existancechecker = "select * from facilitator_details where facilitator_i
                     
                     if(!conn1.rs1.getTimestamp("timestamp").toString().equals(conn.rs.getTimestamp("timestamp").toString())){
                     
-                        String upd="update groups set group_name='"+conn.rs.getString(2)+"',partner_id='"+conn.rs.getString(3)+"',target_pop_id='"+conn.rs.getString(4)+"',district_id='"+conn.rs.getString(5)+"',timestamp='"+conn.rs.getTimestamp(6)+"',wardid='" + conn.rs.getString(7) + "' where group_id='"+conn.rs.getString(1)+"' ";
+                        String upd="update groups set group_name='"+conn.rs.getString(2)+"',partner_id='"+conn.rs.getString(3)+"',target_pop_id='"+conn.rs.getString(4)+"',district_id='"+conn.rs.getString(5)+"',timestamp='"+conn.rs.getTimestamp(6)+"',wardid='" +wardid + "' where group_id='"+conn.rs.getString(1)+"' ";
                         
                         conn1.st2.executeUpdate(upd);
                         

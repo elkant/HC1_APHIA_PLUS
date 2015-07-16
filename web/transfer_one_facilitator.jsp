@@ -21,21 +21,26 @@ response.sendRedirect("index.jsp");
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<link rel="stylesheet" type="text/css" href="css/divCss_2.css"/>
+<link rel="stylesheet" type="text/css" href="css/new_hc_css.css"/>
+
 <link href="menu/style.css" media="screen" rel="stylesheet" type="text/css" />
-<link href="menu/iconic.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="css/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="css/bootstrap-multiselect.css" media="screen" rel="stylesheet" type="text/css" />
+
+<!--<link href="menu/iconic.css" media="screen" rel="stylesheet" type="text/css" />-->
 <link rel="shortcut icon" href="images/hc_logo.png"/>
-<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="js/jquery-2.1.1.js"></script>
+
+
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+
+
 <script type="text/javascript" src="js/noty/jquery.noty.js"></script>
 <script type="text/javascript" src="js/noty/layouts/top.js"></script>
 <script type="text/javascript" src="js/noty/layouts/center.js"></script>
 <!-- You can add more layouts if you want -->
 <script type="text/javascript" src="js/noty/themes/default.js"></script>
-<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
-
-<link href="css/bootstrap-multiselect.css" media="screen" rel="stylesheet" type="text/css" />
-<link href="css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
 
 
 <style>
@@ -83,14 +88,25 @@ xmlhttp.onreadystatechange=function()
 {
 if (xmlhttp.readyState==4 && xmlhttp.status==200)
 {
-document.getElementById("groups").innerHTML=xmlhttp.responseText;
-
- $('#groups').multiselect({
+     $('#groups').html('');
+$('#groups').append(xmlhttp.responseText);
+                   // $('#groups').multiselect('deselectAll', false);
+                   // $('#groups').multiselect('updateButtonText');
+                   $('#groups').multiselect({
                 includeSelectAllOption: true,
                 enableFiltering: true,
                 checkboxName: 'multiselect[]',
-                buttonWidth: '225px'
+                buttonWidth: '225px',
+                maxHeight: 300
             });
+                   
+   
+
+//alert(xmlhttp.responseText);
+ //$('#groups').multiselect('dataprovider', xmlhttp.responseText); 
+  
+ 
+          
 }
 }
 xmlhttp.open("POST","group_loader?partner_id="+partner_id+"&fname="+fname+"&mname="+mname+"&lname="+lname+"&phone="+phone,true);
@@ -114,7 +130,7 @@ xmlhttp.send();
 </div>
 <div id="content" style="height:750px;">
 <div id="midcontent" style="margin-left:130px ;">
-<h4 style="background-color: orange">Edit Current Facilitator.</h4><br>
+<h4 style="background-color: orange">Edit Facilitator Groups.</h4><br>
 
 <%
 String facilitator_id,fname,mname,lname,phone,partner_name,groups,partner_id;
@@ -130,39 +146,39 @@ partner_id=request.getParameter("partner_id");
 %>
 <form action="transfer_facilitator" name="" method="post">
 <table cellpadding="4px" cellspacing="4px" border="0px" >
-<tr><td>
-First Name
+<tr><td style="text-align:right;"><b>
+First Name:</b>
 </td><td>
 <input type="text" id="fname" name="fname" value="<%=fname%>" class="textbox" readonly="true" style="background: #cccccc">
 <input type="hidden" name="facilitator_id" id="facilitator_id" value="<%=facilitator_id%>" class="textbox">
 </td></tr>
-<tr><td>
-Middle Name
+<tr><td style="text-align:right;"><b>
+Middle Name:</b>
 </td><td>
 <input type="text" id="mname" name="mname" value="<%=mname%>" class="textbox" readonly="true" style="background: #cccccc">
 </td></tr>
-<tr><td>
-Last Name
+<tr><td style="text-align:right;"><b>
+Last Name:</b>
 </td><td>
 <input type="text" id="lname" name="lname" value="<%=lname%>" class="textbox" readonly="true" style="background: #cccccc">
 </td></tr>
-<tr><td>
-Phone Number
+<tr><td style="text-align:right;"><b>
+Phone Number: </b>
 </td><td>
 <input type="text" id="phone" name="phone" value="<%=phone%>" class="textbox" readonly="true" style="background: #cccccc">
 </td></tr>
 <tr>
-<td>
-Current Partner<font color="red">*</font>
+<td style="text-align:right;">
+<b>Current Partner:<font color="red">*</font></b>
 </td>
 <td>
 <input type="text" name="part" id="part"value="<%=partner_name%>" class="textbox" readonly="true"style="background: #cccccc">
 <input type="hidden" name="grp" id="grp"value="<%=groups%>" class="textbox" readonly="true"style="background: #cccccc"/>
 </td></tr>
-<tr><td>
-Select New Partner
+<tr><td style="text-align:right;">
+<b>Select New Partner:</b>
 </td><td>
-<select name="partner" style="width:225px;height:38px" id="partner" class="textbox1" onchange="return group_them();">
+<select name="partner" style="width:225px;height:38px" id="partner" class="textbox1" onchange="group_them();">
    
 <option value="<%=partner_id%>"><%=partner_name%></option>
 <% String selector ="select * from partner where partner_id!='"+partner_id+"'";
@@ -175,7 +191,7 @@ while(conn.rs.next()){
 </select>
 </td></tr>
 <tr>
-<td>Select Group</td><td>
+<td style="text-align:right;"><b>Select Group:</b></td><td>
 <select name="groups"  id="groups" class="" style="width:220px;height:30px;" required="true"  multiple="multiple">
 <option value="">loading groups...</option>
 </select>

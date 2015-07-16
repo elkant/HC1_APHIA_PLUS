@@ -469,10 +469,11 @@ if(!con1.rs.next()){
     
   con1.st1.executeUpdate("INSERT INTO `district` (`district_id`, `county_id`, `district_name`) VALUES ('3', '1', 'BAHATI')"); 
   con1.st1.executeUpdate("CREATE TABLE `ward` (  `wardid` int(11) NOT NULL AUTO_INCREMENT,  `wardname` varchar(45) DEFAULT NULL,  `district_id` varchar(45) DEFAULT NULL,  PRIMARY KEY (`wardid`)) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8"); 
-  con1.st1.executeUpdate("INSERT INTO `ward` VALUES (1,'Dundori','3'),(2,'Kabatini','3'),(3,'Kiamaina','3'),(4,'Lanet/umoja','3'),(5,'Bahati','3'),(6,'Gilgil','4'),(7,'Kiptororo','5'),(8,'Nyota','5'),(9,'Sirikwa','5'),(10,'Kamara','5'),(11,'Amalo','5'),(12,'Keringet','5'),(13,'Kiptagich','5'),(14,'Tinet','5'),(15,'Mariashoni','6'),(16,'Elburgon','6'),(17,'Turi','6'),(18,'Molo','6'),(19,'Hells gate','7'),(20,'Lake view','7'),(21,'Mai mahiu','7'),(22,'Maiella','7'),(23,'Olkaria','7'),(24,'Naivasha east','7'),(25,'Viwandani','7'),(26,'Elementaita','7'),(27,'Mbaruk/eburu','7'),(28,'Malewa west','7'),(29,'Murindati','7'),(30,'Biashara','7'),(31,'Mau narok','10'),(32,'Mauche','10'),(33,'Kihingo','10'),(34,'Nessuit','10'),(35,'Lare','10'),(36,'Njoro','10'),(37,'Menengai west','11'),(38,'Soin','11'),(39,'Visoi','11'),(40,'Mosop','11'),(41,'Waseges','12'),(42,'Kabazi','12'),(43,'Narok Town','14'),(44,'Nanyuki','29'),(45,'Menengai','38'),(46,'Barut','38'),(47,'London','38'),(48,'Kaptembwo','38'),(49,'Kapkures','38'),(50,'Rhoda','38'),(51,'Shaabab','38'),(52,'Kivumbini','38'),(53,'Flamingo','38'),(54,'Nakuru east','38')"); 
+  con1.st1.executeUpdate("INSERT INTO `ward` VALUES (1,'Dundori','3'),(2,'Kabatini','3'),(3,'Kiamaina','3'),(4,'Lanet/umoja','3'),(5,'Bahati','3'),(6,'Gilgil','4'),(7,'Kiptororo','5'),(8,'Nyota','5'),(9,'Sirikwa','5'),(10,'Kamara','5'),(11,'Amalo','5'),(12,'Keringet','5'),(13,'Kiptagich','5'),(14,'Tinet','5'),(15,'Mariashoni','6'),(16,'Elburgon','6'),(17,'Turi','6'),(18,'Molo','6'),(19,'Hells gate','7'),(20,'Lake view','7'),(21,'Mai mahiu','7'),(22,'Maiella','7'),(23,'Olkaria','7'),(24,'Naivasha east','7'),(25,'Viwandani','7'),(26,'Elementaita','7'),(27,'Mbaruk/eburu','7'),(28,'Malewa west','7'),(29,'Murindati','7'),(30,'Biashara','7'),(31,'Mau narok','10'),(32,'Mauche','10'),(33,'Kihingo','10'),(34,'Nessuit','10'),(35,'Lare','10'),(36,'Njoro','10'),(37,'Menengai west','11'),(38,'Soin','11'),(39,'Visoi','11'),(40,'Mosop','11'),(41,'Waseges','12'),(42,'Kabazi','12'),(43,'Narok Town','14'),(44,'Nanyuki','29'),(45,'Menengai','38'),(46,'Barut','38'),(47,'London','38'),(48,'Kaptembwo','38'),(49,'Kapkures','38'),(50,'Rhoda','38'),(51,'Shaabab','38'),(52,'Kivumbini','38'),(53,'Flamingo','38'),(54,'Nakuru east','38'),(55,'Igwamiti','30')"); 
   System.out.println("inserting ward table"); 
 
 }
+
 
 
 //also check if wardid exists in groups
@@ -484,19 +485,41 @@ if(!con1.rs.next()){
            con1.st1.executeUpdate("UPDATE ward SET district_id='32' WHERE wardid='54'");
            con1.st1.executeUpdate("UPDATE ward SET district_id='32' WHERE wardid='53'");         
            con1.st1.executeUpdate("UPDATE ward SET district_id='32' WHERE wardid='52'");
+           con1.st1.executeUpdate("REPLACE INTO ward (wardid,wardname,district_id) VALUES ('55','Igwamiti', '30')");
              
 
          
             }
+            
+            else {
+            //check if there is a group with a ward that contains a name
+            //
+           con1.rs3=con1.st3.executeQuery("SELECT group_id,wardid FROM groups where wardid like '%,%'");
+           while(con1.rs3.next()){
+            String wardid=con1.rs3.getString("wardid");
+              if(wardid.contains(",")){ 
+              String wards[]=wardid.split(",");
+              wardid=wards[0];
+                  
+                                      }
+           
+           con1.st4.executeUpdate("update groups set wardid='"+wardid+"' where group_id='"+con1.rs3.getString("group_id")+"'");
+           
+           }     
+            
+            }
                       
             
             if(con1.rs!=null){con1.rs.close();}
+            if(con1.rs3!=null){con1.rs3.close();}
             if(con1.st!=null){con1.st.close();}
             if(con1.st1!=null){con1.st1.close();}
+            if(con1.st3!=null){con1.st3.close();}
             
-               if(con.rs!=null){con.rs.close();}
+            if(con.rs!=null){con.rs.close();}
             if(con.st!=null){con.st.close();}
             if(con.st1!=null){con.st1.close();}
+            if(con.st4!=null){con.st4.close();}
             
             
 %>

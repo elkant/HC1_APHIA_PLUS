@@ -236,7 +236,7 @@ String qry="SELECT count(member_details.member_id) as PARTICIPANT,"
 +" when MONTH=9 THEN '"+yr+" (9) SEP'"
 +" when MONTH=10 THEN '"+prevyr+" (10) OCT'"
 +" when MONTH=11 THEN '"+prevyr+" (11) NOV'"
-+" when MONTH=12 THEn '"+prevyr+" (12) DEC'"
++" when MONTH=12 THEN '"+prevyr+" (12) DEC'"
 +" END AS MONTHS"
 
 +" ,year as YEAR,Upper(county_name) as COUNTY  "

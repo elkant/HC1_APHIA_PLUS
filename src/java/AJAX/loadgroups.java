@@ -112,8 +112,8 @@ HttpSession session=null;
 		            +"</thead>"
 		            +"";
             
-            String getdetails="select group_id, group_name as groupname, partner_name as partner, population_name as target,district_name as district, wardname as ward,groups.district_id as distid,groups.wardid as wardid,groups.target_pop_id as targetpopid,groups.partner_id as partnerid from groups join district on groups.district_id=district.district_id  join partner on groups.partner_id=partner.partner_id left join ward on groups.wardid=ward.wardid  join target_population on groups.target_pop_id=target_population.target_id where county_id='"+cnty+"'";
-            
+            String getdetails="select group_id, group_name as groupname, partner_name as partner, population_name as target,district_name as district, wardname as ward,groups.district_id as distid,groups.wardid as wardid,groups.target_pop_id as targetpopid,groups.partner_id as partnerid from groups left join district on groups.district_id=district.district_id  join partner on groups.partner_id=partner.partner_id left join ward on groups.wardid=ward.wardid  left join target_population on groups.target_pop_id=target_population.target_id where county_id='"+cnty+"' order by group_name";
+            int count=0;
             conn.rs=conn.st.executeQuery(getdetails);            
             
             while(conn.rs.next()){
@@ -122,7 +122,8 @@ HttpSession session=null;
                 if(conn.rs.getString("ward")!=null){
                 ward=conn.rs.getString("ward").toUpperCase();
                 }
-                
+                count++;
+                System.out.println("__"+count+"_"+conn.rs.getString("groupname").toUpperCase());
             //now filter the wards that belong to certain district only
                 
                 //for(int a=0;a<wardid.size();a++){
@@ -140,7 +141,7 @@ HttpSession session=null;
             + "<td style='align:left;width:300px;'>"+conn.rs.getString("target")+"</td>" 
             + "<td style='align:center;'>"+ward+"</td>"  
             + "<td style='align:left;width:200px;'>"+conn.rs.getString("district")+"</td>"           
-            + "<td style='align:left;width:200px;'><a class='sbmit' target='_blank' href=\"edit_group_session?county="+county+"&district="+conn.rs.getString("distid")+","+conn.rs.getString("district")+"&partner="+conn.rs.getString("partnerid")+"&group="+conn.rs.getString("group_id")+"&ward="+conn.rs.getString("wardid")+"><b>Edit group</b></a></td>"           
+            + "<td style='align:left;width:200px;'><a class='sbmit' target='_blank' href=\"edit_group_session?county="+county+"&district="+conn.rs.getString("distid")+","+conn.rs.getString("district")+"&partner="+conn.rs.getString("partnerid")+"&group="+conn.rs.getString("group_id")+"&ward="+conn.rs.getString("wardid")+"\"><b>Edit group</b></a></td>"           
                     
             + "</tr>";
                 
@@ -167,7 +168,7 @@ HttpSession session=null;
             
             out.println(jo);
             
-            
+        System.out.println(table);   
             
         } catch (SQLException ex) {
             Logger.getLogger(loadgroups.class.getName()).log(Level.SEVERE, null, ex);
