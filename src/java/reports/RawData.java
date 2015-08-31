@@ -19,11 +19,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFFont;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
@@ -47,8 +48,8 @@ public class RawData extends HttpServlet {
         HSSFWorkbook workbook;
         
      //  HSSFWorkbook wb = new HSSFWorkbook();
-     XSSFWorkbook    wb = new XSSFWorkbook();
-
+     XSSFWorkbook    wb1 = new XSSFWorkbook();
+    SXSSFWorkbook wb = new SXSSFWorkbook(wb1, 100);
        String year=request.getParameter("year");
        String targetpopulation[]=request.getParameterValues("targetpop");
        String county="";
@@ -160,11 +161,11 @@ public class RawData extends HttpServlet {
         
         
         //HSSFSheet worksheet = wb.createSheet("HC1 RAW DATA");
-        XSSFSheet worksheet = wb.createSheet("HC1 RAW DATA");
+       Sheet worksheet = wb.createSheet("HC1 RAW DATA");
 
 
                 //%%%%%%%%%%%%%%%%HEADER FONTS AND COLORATION%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                XSSFFont font_header = wb.createFont();
+                Font font_header = wb.createFont();
                 font_header.setFontHeightInPoints((short) 9);
                 font_header.setFontName("Arial Black");
 
@@ -175,7 +176,7 @@ public class RawData extends HttpServlet {
                 font_header.setColor(HSSFColor.BLACK.index);
 
                 //font data
-                XSSFFont datafont = wb.createFont();
+               Font datafont = wb.createFont();
                 datafont.setBoldweight((short) 03);
               
                 datafont.setFontHeightInPoints((short) 10);
@@ -235,9 +236,9 @@ public class RawData extends HttpServlet {
                 innerdata_style.setBorderLeft(HSSFCellStyle.BORDER_THIN);
                 
                 
-                XSSFRow allsitescolumnheader = worksheet.createRow(0);
+                Row allsitescolumnheader = worksheet.createRow(0);
                 allsitescolumnheader.setHeightInPoints(25);
-               XSSFCell rwcolheader=null;
+               Cell rwcolheader=null;
                 
               
                 
@@ -251,7 +252,7 @@ public class RawData extends HttpServlet {
                 }
             
             
-             XSSFRow rw2 = null;
+             Row rw2 = null;
 
            
 
@@ -270,101 +271,101 @@ public class RawData extends HttpServlet {
             rw2.setHeightInPoints(25);
             
             //OVCcount
-           XSSFCell cell1 = rw2.createCell(0);
+           Cell cell1 = rw2.createCell(0);
             cell1.setCellValue(conn.rs.getString(1));
             //cell1.setCellStyle(innerdata_style);
             
             //AGE
-            XSSFCell cell2 = rw2.createCell(1);
+            Cell cell2 = rw2.createCell(1);
             cell2.setCellValue(conn.rs.getString(2));
            // cell2.setCellStyle(innerdata_style);
             
             
             //Number of services
-             XSSFCell cell3 = rw2.createCell(2);
+             Cell cell3 = rw2.createCell(2);
             cell3.setCellValue(conn.rs.getString(3));
            // cell3.setCellStyle(innerdata_style);
             
             
             
               //Number of services
-             XSSFCell cell4 = rw2.createCell(3);
+            Cell cell4 = rw2.createCell(3);
             cell4.setCellValue(conn.rs.getString(4));
             // cell3.setCellStyle(innerdata_style);
            
             
                 //Number of services
-             XSSFCell cell5 = rw2.createCell(4);
+             Cell cell5 = rw2.createCell(4);
             cell5.setCellValue(conn.rs.getString(5));
             // cell3.setCellStyle(innerdata_style);
             
                 //Number of services
-             XSSFCell cell6 = rw2.createCell(5);
+            Cell cell6 = rw2.createCell(5);
             cell6.setCellValue(conn.rs.getString(6));
             // cell3.setCellStyle(innerdata_style);
             
             
             
                 //Number of services
-             XSSFCell cell7 = rw2.createCell(6);
+            Cell cell7 = rw2.createCell(6);
             cell7.setCellValue(conn.rs.getString(7));
             // cell3.setCellStyle(innerdata_style);
             
             
-                 XSSFCell cell8 = rw2.createCell(7);
+                Cell cell8 = rw2.createCell(7);
             cell8.setCellValue(conn.rs.getString(8));
             // cell3.setCellStyle(innerdata_style);
          
             
-                   XSSFCell cell9 = rw2.createCell(8);
+                  Cell cell9 = rw2.createCell(8);
             cell9.setCellValue(conn.rs.getString(9));
             // cell3.setCellStyle(innerdata_style);
             
             
             
-                   XSSFCell cell10 = rw2.createCell(9);
+                  Cell cell10 = rw2.createCell(9);
             cell10.setCellValue(conn.rs.getString(10));
             // cell3.setCellStyle(innerdata_style);
             
             
             
-            XSSFCell cell11 = rw2.createCell(10);
+            Cell cell11 = rw2.createCell(10);
             cell11.setCellValue(conn.rs.getString(11));
             // cell3.setCellStyle(innerdata_style);
             
             
             
-                   XSSFCell cell12 = rw2.createCell(11);
+                  Cell cell12 = rw2.createCell(11);
             cell12.setCellValue(conn.rs.getString(12));
             // cell3.setCellStyle(innerdata_style);
             
-            XSSFCell cell13 = rw2.createCell(12);
+            Cell cell13 = rw2.createCell(12);
             cell13.setCellValue(conn.rs.getString(13));
             // cell3.setCellStyle(innerdata_style);
             
             
-            XSSFCell cell14 = rw2.createCell(13);
+            Cell cell14 = rw2.createCell(13);
             cell14.setCellValue(conn.rs.getString(14));
             // cell3.setCellStyle(innerdata_style);
            
             //start date
-            XSSFCell cell15 = rw2.createCell(14);
+            Cell cell15 = rw2.createCell(14);
             cell15.setCellValue(conn.rs.getString(15));
             
             //end date
-            XSSFCell cell16 = rw2.createCell(15);
+            Cell cell16 = rw2.createCell(15);
             cell16.setCellValue(conn.rs.getString(16));
             
             //form number
-             XSSFCell cell17 = rw2.createCell(16);
+             Cell cell17 = rw2.createCell(16);
             cell17.setCellValue(conn.rs.getString(17));
             
             //curriculum
-                  XSSFCell cell18 = rw2.createCell(17);
+                 Cell cell18 = rw2.createCell(17);
             cell18.setCellValue(conn.rs.getString(18));
             
             
-            XSSFCell cell19 = rw2.createCell(18);
+           Cell cell19 = rw2.createCell(18);
             cell19.setCellValue(conn.rs.getString(19));
             }          
                 
@@ -380,10 +381,11 @@ public class RawData extends HttpServlet {
         response.setContentType("application/ms-excel");
         response.setContentLength(outArray.length);
         response.setHeader("Expires:", "0"); // eliminates browser caching
-        response.setHeader("Content-Disposition", "attachment; filename=HC_RAWDATA" + dat1 + ".xlsx");
+        response.setHeader("Content-Disposition", "attachment; filename=HC_RAWDATA_Generated_on_" + dat1 + ".xlsx");
         OutputStream outStream = response.getOutputStream();
         outStream.write(outArray);
         outStream.flush();
+        wb.dispose();
         } catch (SQLException ex) {
             Logger.getLogger(RawData.class.getName()).log(Level.SEVERE, null, ex);
         

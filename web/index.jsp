@@ -38,6 +38,15 @@ $( document ).tooltip();
 $( "#accordion" ).accordion();
 
 }); 
+
+
+
+
+
+
+
+
+
 </script>
     </head>
     
@@ -59,7 +68,7 @@ $( "#accordion" ).accordion();
             <div id="content">
                  <!--- NOW CHECK THE UPDATES  --->
                  <%
-                            if (1==2)  { %>
+                            if (1==1)  { %>
                                 <script type="text/javascript"> 
                     
                     
@@ -148,7 +157,8 @@ $( "#accordion" ).accordion();
                     <h4 align="center"><img src="images/hclogo.png" alt="Health Communication System" align="centre"/></h4>
                     
                     <br/><br/>
-                    <form action="login" method="post" style="margin-left: 135px; height:250px; width:360px;">
+                    <div id="loginform">
+                    <form action="login"  method="post" style="margin-left: 135px; height:250px; width:360px;">
                        <p align="center">Login</p>
                         <table style="margin-left:90px; width:150px;" cellpadding="8px" cellspacing="6px">
                             <tr>
@@ -194,6 +204,7 @@ $( "#accordion" ).accordion();
                         %>
                         </h4>
                     </form>
+                        </div>
                 </div>
             </div>
 
@@ -220,7 +231,7 @@ Calendar cal = Calendar.getInstance();
 int year= cal.get(Calendar.YEAR);  
 dbConn conn=new dbConn();
 
-String versionupdate="ALTER TABLE `version` ADD COLUMN `date` VARCHAR(45)  NULL DEFAULT  '2015_07_10'  AFTER `version_name` , ADD COLUMN `updateslink` VARCHAR(45)  NULL DEFAULT  'HC1_VERSION_1.6'  AFTER `date` ";
+String versionupdate="ALTER TABLE `version` ADD COLUMN `date` VARCHAR(45)  NULL DEFAULT  '2015_08_11'  AFTER `version_name` , ADD COLUMN `updateslink` VARCHAR(45)  NULL DEFAULT  'HC1_VERSION_1.8'  AFTER `date` ";
  String ch1 = "SHOW COLUMNS FROM version LIKE 'date'";
             conn.rs = conn.st.executeQuery(ch1);
             if (!conn.rs.next()) {
@@ -228,23 +239,101 @@ String versionupdate="ALTER TABLE `version` ADD COLUMN `date` VARCHAR(45)  NULL 
                 conn.st1.executeUpdate(versionupdate);
                 
                   }
-         else { conn.st1.executeUpdate("update version set date='2015_07_10' ,version_name='HC1_VERSION_1.6' ,updateslink='' where version_id='1' "); }
+         else { conn.st1.executeUpdate("update version set date='2015_08_11' ,version_name='HC1_VERSION_1.8' ,updateslink='http://1drv.ms/1HIqIzZ' where version_id='1' "); }
 
 
 conn.rs=conn.st.executeQuery("select version_name , date from version");          
 conn.rs.next();
 %>
-               <p align="center"> &copy <a href="#" title="<%=conn.rs.getString(1)%> compiled on <%=conn.rs.getString(2)%>">HC1</a> Aphia Plus | USAID <%=year%></p>
+                 <div id="versionChecker" style="font-weight: bolder; text-align:center;">
+                         </div><br>
+               <p align="center"> &copy <a href="" title="<%=conn.rs.getString(1)%> created on <%=conn.rs.getString(2)%>"><%=conn.rs.getString(1)%> compiled on <%=conn.rs.getString(2)%></a> Aphia Plus | USAID <%=year%></p>
             
-            <%
-            conn.rs.close();
+   
+            
+            </div>
+        </div>
+
+
+
+<%
+
+String locktableexists="SHOW TABLES LIKE 'lock_data'";
+
+
+conn.rs=conn.st.executeQuery(locktableexists);
+if(!conn.rs.next()){
+
+//now create the table
+    
+  conn.st1.executeUpdate("CREATE TABLE `lock_data` (  `id` int(11) NOT NULL AUTO_INCREMENT,  `lock_date` varchar(45) DEFAULT NULL,  `min_date` varchar(45) DEFAULT NULL COMMENT 'This date is entered in the following format, month/day/ year e.g 08/28/2015 for August 28 2015.',  `updated_on` timestamp NULL DEFAULT CURRENT_TIMESTAMP,  PRIMARY KEY (`id`)) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8"); 
+ 
+
+}
+else {
+
+
+%>
+<script>
+    
+                   $.ajax({
+                        url:'setSystemDate',                         
+                        type:'post',  
+                        dataType: 'html',  
+                        success: function(data) {}
+                        
+                         });
+                         
+                         
+                         //check system update
+                         
+                         
+                                           if(!('contains' in String.prototype)) {
+       String.prototype.contains = function(str, startIndex) {
+                return -1 !== String.prototype.indexOf.call(this, str, startIndex);
+       };
+ }  
+                         
+                          function checkVersion(){
+//    CHECK Version------------------- 
+$("#versionChecker").html("<p>Checking for newer Version...</p>");
+var versionText="",daysRemaining,warningText="",sentOn="",version_name="";
+ $.ajax({
+                    url:"version",
+                    type:'post',
+                    dataType:'html',
+                    success:function (data){
+                        if(data.trim()==="no_internet"){
+                          $("#versionChecker").html  ("<p style='color: blue; font-size:10px;'>Unable to check if there is a newer version of DIC system due to limited or no internet connection.</p>");
+      setInterval(function(){ checkVersion(); }, 60000);          
+        }
+                        else{
+                            
+        
+                      if(data.contains("outdated version")){
+                          $("#loginform").css("display","none");  
+                      
+                      }
+$("#versionChecker").html(data);
+                        }
+  }  
+  });   
+      }
+ 
+                         
+   checkVersion();                
+               
+</script>    
+
+<%
+}
+%>
+         <%
+conn.rs.close();
 conn.st.close();
 
           
 %>
-            
-            </div>
-        </div>
     </body>
     
     

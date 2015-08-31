@@ -80,7 +80,7 @@
 <script type="text/javascript">
 
 //manage drop down list for primary and secondary schools
-getfacil();
+
 
  function getfacil(){
                 var xmlhttp;    
@@ -97,6 +97,10 @@ getfacil();
                 {
                     if (xmlhttp.readyState==4 && xmlhttp.status==200)
                     {
+                        if(xmlhttp.responseText.trim()==='<h1><option value="">No added facilitators </option></h1>'){
+                           document.getElementById("no_of_facils").value="2"; 
+                            
+                        }
                         document.getElementById("facil").innerHTML=xmlhttp.responseText;
                     }
                 }
@@ -245,7 +249,7 @@ xmlhttp.send();
 
                                 </select>
                             </td></tr>
-<tr><td class="align_button_right">Number of facilitators to add </td><td><input type="text" class="textbox" value="0" name="no_of_facils" required></td></tr>
+<tr><td class="align_button_right">Number of facilitators to add </td><td><input type="text" class="textbox" value="0" name="no_of_facils" id="no_of_facils" required></td></tr>
 <tr><td></td><td><input type="submit" value="Next" style="height: 35px;width:100px; background-color: orange;"/></td></tr>
 
 
@@ -264,6 +268,10 @@ int year= cal.get(Calendar.YEAR);
 
             </div>
 </div>    
-
+<script>
+    
+    getfacil();
+    
+</script>
 </body>
 </html>

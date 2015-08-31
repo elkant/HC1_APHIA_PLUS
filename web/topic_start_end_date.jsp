@@ -51,6 +51,22 @@
         <script type="text/javascript">
     
     
+    var mindate="";
+    
+    
+    
+    $.ajax({
+                        url:'loadMinDate',                         
+                        type:'post',  
+                        dataType: 'html',  
+                        success: function(data) {
+                            
+                            mindate=data;
+                        }
+                        
+                         });
+    
+    
             function getfacil(){
                 var xmlhttp;    
 
@@ -277,14 +293,16 @@
                     
                                 changeMonth: true,
                                 changeYear: true
+                                , maxDate: new Date(),
+                                minDate:mindate
                     
                 });
                 $( "#datepicker2" ).datepicker({
                     
                                 changeMonth: true,
-                                changeYear: true
-                             
-                    
+                                changeYear: true,
+                             maxDate: new Date(),
+                             minDate:mindate
                 });
                 //$( document ).tooltip();
 

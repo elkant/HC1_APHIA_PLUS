@@ -70,11 +70,9 @@ if (xmlhttp.readyState==4 && xmlhttp.status==200)
     
     
 
-var n = noty({text: '<%=session.getAttribute("datasend")%>',
+var n = noty({text: '<h2><%=session.getAttribute("datasend")%></h2>',
                         layout: 'center',
-                        type: 'Success',
- 
-                         timeout: 4800});
+                        type: 'Success'});
 
 
 }
@@ -216,11 +214,9 @@ if (session.getAttribute("username").equals("m&e")){
     %>
                                 <script type="text/javascript"> 
                     
-                    var n = noty({text: '<%=session.getAttribute("datasend")%>',
-                        layout: 'center',
-                          type: 'Success',
- 
-                         timeout: 1800});
+                    var n = noty({text: '<h2><%=session.getAttribute("datasend")%></h2>',
+                                layout: 'center',
+                                  type: 'Success'});
                     
                                     </script> 
                 <%

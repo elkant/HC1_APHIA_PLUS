@@ -46,14 +46,14 @@ dbConn conn=null;
     String allpath = getServletContext().getRealPath("/dbase.txt");
         String mydrive = allpath.substring(0, 1);
         //dbconnpath=mydrive+":\\MNHC_SYSTEM_APHIA_PLUS\\"; 
-  path=mydrive+":\\APHIAPLUS\\HCDBCONNECTION\\DO_NOT_DELETE\\_\\_\\."; 
+  path=mydrive+":\\APHIAPLUS\\HCDBCONNECTION\\DO_NOT_DELETE\\_\\_\\"; 
   ExistingPath=mydrive+":\\APHIAPLUS\\HCDBCONNECTION\\DO_NOT_DELETE\\_\\_\\LastBackUp.txt";     
            File f = new File(ExistingPath);
            if(f.isFile() && !f.isDirectory()){
            System.out.println("The file exist");
            
           
-            String fpath = mydrive+ ":/APHIAPLUS/HCDBCONNECTION/DO_NOT_DELETE/_/_/./LastBackUp.txt";
+            String fpath = mydrive+ ":/APHIAPLUS/HCDBCONNECTION/DO_NOT_DELETE/_/_/LastBackUp.txt";
   
             FileInputStream fstream = new FileInputStream(fpath);
             // Get the object of DataInputStream
@@ -80,7 +80,7 @@ dbConn conn=null;
                 
                 
                 //             CHEK IF DATA HAS BEEN ENTERED=================================
-              String checkRegister="SELECT COUNT(register_id) FROM register_attendance WHERE STR_TO_DATE(timestamp,'%Y-%m-%d')"
+              String checkRegister="SELECT COUNT(group_id) FROM groups WHERE STR_TO_DATE(timestamp,'%Y-%m-%d')"
                       + " BETWEEN STR_TO_DATE('"+lastBackUp+"','%Y-%m-%d') AND STR_TO_DATE('"+today+"','%Y-%m-%d')";
               
               System.out.println(checkRegister);

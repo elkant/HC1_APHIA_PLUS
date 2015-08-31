@@ -706,6 +706,34 @@
         <servlet-name>uniquetargetpops2s</servlet-name>
         <servlet-class>AJAX.uniquetargetpops2s</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>setSystemDate</servlet-name>
+        <servlet-class>SCRIPTS.setSystemDate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>loadMinDate</servlet-name>
+        <servlet-class>SCRIPTS.loadMinDate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>version</servlet-name>
+        <servlet-class>SCRIPTS.version</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>loadMaxTimestamp</servlet-name>
+        <servlet-class>AJAX.loadMaxTimestamp</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updatebackupdate</servlet-name>
+        <servlet-class>backup.updatebackupdate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>QuarterlyTargets</servlet-name>
+        <servlet-class>reports.QuarterlyTargets</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>pepfar_county_targets</servlet-name>
+        <servlet-class>reports.pepfar_county_targets</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>add_district</servlet-name>
         <url-pattern>/add_district</url-pattern>
@@ -1409,6 +1437,34 @@
     <servlet-mapping>
         <servlet-name>uniquetargetpops2s</servlet-name>
         <url-pattern>/uniquetargetpops2s</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>setSystemDate</servlet-name>
+        <url-pattern>/setSystemDate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loadMinDate</servlet-name>
+        <url-pattern>/loadMinDate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>version</servlet-name>
+        <url-pattern>/version</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loadMaxTimestamp</servlet-name>
+        <url-pattern>/loadMaxTimestamp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updatebackupdate</servlet-name>
+        <url-pattern>/updatebackupdate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuarterlyTargets</servlet-name>
+        <url-pattern>/QuarterlyTargets</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>pepfar_county_targets</servlet-name>
+        <url-pattern>/pepfar_county_targets</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>900000</session-timeout>

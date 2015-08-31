@@ -48,6 +48,11 @@
     <!-- You can add more layouts if you want -->
     <script type="text/javascript" src="js/noty/themes/default.js"></script>
     <script type="text/javascript">  
+        
+        
+     
+        
+        
         function forms_calc(nos2){
                     //if(nos2!=""){
                     if(nos2=="1"){
@@ -125,27 +130,7 @@ return true;
    
     
     <script type="text/javascript">
-    
-        $(function() {
-            $( "#datepicker0" ).datepicker({changeMonth: true,changeYear: true});
-            $( "#datepicker1" ).datepicker({changeMonth: true,changeYear: true});
-            $( "#datepicker2" ).datepicker({changeMonth: true,changeYear: true});
-            $( "#datepicker3" ).datepicker({changeMonth: true,changeYear: true});
-            $( "#datepicker4" ).datepicker({changeMonth: true,changeYear: true});
-            $( "#datepicker5" ).datepicker({changeMonth: true,changeYear: true});
-            $( "#datepicker6" ).datepicker({changeMonth: true,changeYear: true});
-            $( "#datepicker7" ).datepicker({changeMonth: true,changeYear: true});
-            $( "#datepicker8" ).datepicker({changeMonth: true,changeYear: true});
-            $( "#datepicker9" ).datepicker({changeMonth: true,changeYear: true});
-            $( "#datepicker10").datepicker({changeMonth: true,changeYear: true});
-            $( "#datepicker11").datepicker({changeMonth: true,changeYear: true});
-            $(document).tooltip();
-            
-            
-         
-            
-        });  
-         
+
         
            function setcolor (val,id) {
                
@@ -666,6 +651,51 @@ if(inputdate!=""){
 
         </div>
     </div>
+                                
+                                
+                                <script>
+                                    
+                                    
+                                        
+        $(function() {
+            
+               
+         var mindate="";
+    
+    
+    
+    $.ajax({
+                        url:'loadMinDate',                         
+                        type:'post',  
+                        dataType: 'html',  
+                        success: function(data) {
+                            
+                            mindate=data;
+                        }
+                        
+                         });
+            
+            $( "#datepicker0" ).datepicker({changeMonth: true,changeYear: true,minDate:mindate, maxDate: new Date()});
+            $( "#datepicker1" ).datepicker({changeMonth: true,changeYear: true,minDate:mindate, maxDate: new Date()});
+            $( "#datepicker2" ).datepicker({changeMonth: true,changeYear: true,minDate:mindate, maxDate: new Date()});
+            $( "#datepicker3" ).datepicker({changeMonth: true,changeYear: true,minDate:mindate, maxDate: new Date()});
+            $( "#datepicker4" ).datepicker({changeMonth: true,changeYear: true,minDate:mindate, maxDate: new Date()});
+            $( "#datepicker5" ).datepicker({changeMonth: true,changeYear: true,minDate:mindate, maxDate: new Date()});
+            $( "#datepicker6" ).datepicker({changeMonth: true,changeYear: true,minDate:mindate, maxDate: new Date()});
+            $( "#datepicker7" ).datepicker({changeMonth: true,changeYear: true,minDate:mindate, maxDate: new Date()});
+            $( "#datepicker8" ).datepicker({changeMonth: true,changeYear: true,minDate:mindate, maxDate: new Date()});
+            $( "#datepicker9" ).datepicker({changeMonth: true,changeYear: true,minDate:mindate, maxDate: new Date()});
+            $( "#datepicker10").datepicker({changeMonth: true,changeYear: true,minDate:mindate, maxDate: new Date()});
+            $( "#datepicker11").datepicker({changeMonth: true,changeYear: true,minDate:mindate, maxDate: new Date()});
+            $(document).tooltip();
+            
+            
+         
+            
+        });  
+         
+                                    
+                                </script>
 </body>
 
 </html>

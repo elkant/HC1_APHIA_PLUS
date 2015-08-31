@@ -159,18 +159,21 @@ System.out.println("target population name is "+session.getAttribute("cc_target_
 
             int noofrows = 0;
 
+            String defsex="";
+            
 //========CHECK OF THE TARGET POP IS GENDER SENSITIVE========
             
             String gen=" <option value=\"\" selected>Choose Sex</option>";
             
             if(target_pop.equals("1")||target_pop.equals("13")||session.getAttribute("cc_target_pop").equals("FEMALES (15 to 24)")||session.getAttribute("cc_target_pop").equals("FSW")||session.getAttribute("cc_target_pop").equals("FSW (SISTER TO SISTER)")){
-            
+            defsex=" <select title='default gender that will apply for all members' id=\"def\" class=\"textbox10\" name=\"def\" onchange='applydefault(this)'> <option selected=\"\" value=\"\">Default Sex</option> <option value=\"female\">Female</option></select>";
             
                         gen+= " <option value=\"female\">Female</option>";
             }
             else if(target_pop.equals("2")||session.getAttribute("cc_target_pop").equals("MSM (SAFE IN THE CITY)")||session.getAttribute("cc_target_pop").equals("MSM")){
             
             gen+= " <option value=\"male\">Male</option>";
+                defsex=" <select title='default gender that will apply for all members' id=\"def\" class=\"textbox10\" name=\"def\" onchange='applydefault(this)'> <option selected=\"\" value=\"\">Default Sex</option> <option value=\"male\">Male</option></select>";
             
             }
             else{
@@ -182,7 +185,7 @@ System.out.println("target population name is "+session.getAttribute("cc_target_
             
             
             
-            String createdtable = "<tr><th>No.</th><th><font color=\"RED\">*</font> First name</th><th> Middle name</th><th><font color=\"RED\">*</font> Last name</th><th><font color=\"RED\">*</font> Gender</th><th><font color=\"RED\">*</font> Age</th></tr>";
+            String createdtable = "<tr style='height:30px;background:orange;'><th style='text-align:left;'>No.</th><th style='text-align:left;'><font color=\"RED\">*</font> First name</th><th style='text-align:left;'> Middle name</th><th style='text-align:left;'><font color=\"RED\">*</font> Last name</th><th style='text-align:left;'><font color=\"RED\">*</font> Gender "+defsex+" </th><th style='text-align:left;'><font color=\"RED\">*</font> Age</th></tr>";
 
             if (!request.getParameter("number_of_members").equals("")) {
                 noofrows = Integer.parseInt(request.getParameter("number_of_members"));

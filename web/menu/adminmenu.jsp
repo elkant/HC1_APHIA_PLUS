@@ -144,7 +144,10 @@ and open the template in the editor.
                      <li><a href="mergedata.jsp"><img src="images/import.png" width="24px"/>
                             Merge Data</a> </li>  
                       <li><a href="uploadhclivedata.jsp"><img src="images/import.png" width="24px"/>
-                            UPLOAD HC LIVE Data</a> </li>  
+                            UPLOAD HC LIVE Data</a> </li> 
+                            <li><a href="backdate.jsp"><img src="images/edit.png"/>
+                           Backdate Backup date</a> </li> 
+                           
                     </ul>
                     </li>
                     

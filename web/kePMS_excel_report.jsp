@@ -116,7 +116,7 @@ xmlhttp.send();
 
 </h4>
 <p><font color="red">*</font> indicates must fill fields</p>
-<form action="fastkepms" method="get">
+<form action="pepfar_county_targets" method="get">
 <table cellpadding="2px" cellspacing="3px" border="0px">
 <tr> <td class="align_button_right" style="width:300px;">Choose PEPFAR Year <font color="red">*</font></td>
 <td><Select name="year" id="year" class="textbox6"   required ="true">

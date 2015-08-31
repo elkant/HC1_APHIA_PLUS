@@ -39,6 +39,17 @@
         <link href="css/style.css" media="screen" rel="stylesheet" type="text/css" />
         <link href="iconic.css" media="screen" rel="stylesheet" type="text/css" />
         <script src="prefix-free.js"></script>
+        
+        
+        <style>
+    #content{
+        
+        font-family: cambria;
+        font-size: 17px;
+    }
+    
+</style> 
+        
         <title>Add new Members</title>
                <script type="text/javascript" language="en">
                    
@@ -185,7 +196,27 @@ errors = jQuery.grep(errors, function(value) {
             
             
         }
-            
+           
+    
+    function applydefault(id){
+        
+        //get all the options and define a default one
+        var defsex="";
+        
+        defsex=$("#def").val();
+       
+        $("select").val(defsex);
+       var allsexes = new Array();
+//$('#sex1 option').each(function(){
+//    allsexes.push(this.value);
+//    
+//    
+//    
+//});
+        
+        
+    }
+    
             
             //
         </script>
@@ -268,11 +299,28 @@ errors = jQuery.grep(errors, function(value) {
 <!--                <h4 style="text-align: center;">Participants Registration Page</h4> -->
                 
                 
-                <% if (district.equals("")) {%>
+            
+                <!--Create unique userid codes-->
 
 
-                <form action="#" style="margin-left: 10px; width:900px;">
-                    <table cellpadding="2px" cellspacing="1px" border="0px" width="900px">
+
+
+<br/>
+
+            </div>
+
+
+            <div id="content" style="height:750px;">
+
+
+                <div id="midcontent" style="margin-left:80px ;">
+
+                    
+                        <% if (district.equals("")) {%>
+
+
+                <form action="#" style="margin-left: -70px; width:1000px;">
+                    <table cellpadding="2px" cellspacing="1px" border="0px" width="1000px">
                         <tr>
                             <td><font color="white"><b>District:</b></font> <%out.println(session.getAttribute("cc_district"));%></td>&nbsp;&nbsp;&nbsp;&nbsp;
                              <td><font color="white"><b>Target Population:</b></font> <%out.println(session.getAttribute("cc_target_pop"));%> </td>&nbsp;&nbsp;&nbsp;&nbsp; 
@@ -288,28 +336,17 @@ errors = jQuery.grep(errors, function(value) {
                     </table>
                 </form>
                 <%}%>
-                <!--Create unique userid codes-->
-
-
-
-
-<br/>
-
-            </div>
-
-
-            <div id="content" style="height:750px;">
-
-
-                <div id="midcontent" style="margin-left:130px ;">
-
+                    
+                    
+                    
+                    
 
                     <h4>
                         <font color="red">*</font> Indicates must fill/select. 
 
                     </h4>
-                    <form action="members_reg" method="post" onsubmit="return vali()" style=" width: 900px; margin-left: -70px;">
-                        <table cellpadding="5px"  cellspacing="2px" id="memberstable" border="0px" width="900px">
+                    <form action="members_reg" method="post" onsubmit="return vali()" style=" width: 1000px; margin-left: -70px;">
+                        <table cellpadding="5px"  cellspacing="2px" id="memberstable" border="0px" width="1000px">
                    <%=session.getAttribute("memberscreatedtable")%>
                    
                    <%if(session.getAttribute("ispartisadded")!=null){ 

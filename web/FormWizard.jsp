@@ -49,6 +49,9 @@
 	<script src="ui/jquery.ui.effect-explode.js"></script>
 	<link rel="stylesheet" href="ui-essentials/demos.css">
         <script type="text/javascript" src="js/js/sisyphus.min.js"></script>
+        
+   
+        
                 <script>
 	$(function() {
 		$( "#dialog" ).dialog({
@@ -469,7 +472,7 @@ if(!con1.rs.next()){
     
   con1.st1.executeUpdate("INSERT INTO `district` (`district_id`, `county_id`, `district_name`) VALUES ('3', '1', 'BAHATI')"); 
   con1.st1.executeUpdate("CREATE TABLE `ward` (  `wardid` int(11) NOT NULL AUTO_INCREMENT,  `wardname` varchar(45) DEFAULT NULL,  `district_id` varchar(45) DEFAULT NULL,  PRIMARY KEY (`wardid`)) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8"); 
-  con1.st1.executeUpdate("INSERT INTO `ward` VALUES (1,'Dundori','3'),(2,'Kabatini','3'),(3,'Kiamaina','3'),(4,'Lanet/umoja','3'),(5,'Bahati','3'),(6,'Gilgil','4'),(7,'Kiptororo','5'),(8,'Nyota','5'),(9,'Sirikwa','5'),(10,'Kamara','5'),(11,'Amalo','5'),(12,'Keringet','5'),(13,'Kiptagich','5'),(14,'Tinet','5'),(15,'Mariashoni','6'),(16,'Elburgon','6'),(17,'Turi','6'),(18,'Molo','6'),(19,'Hells gate','7'),(20,'Lake view','7'),(21,'Mai mahiu','7'),(22,'Maiella','7'),(23,'Olkaria','7'),(24,'Naivasha east','7'),(25,'Viwandani','7'),(26,'Elementaita','7'),(27,'Mbaruk/eburu','7'),(28,'Malewa west','7'),(29,'Murindati','7'),(30,'Biashara','7'),(31,'Mau narok','10'),(32,'Mauche','10'),(33,'Kihingo','10'),(34,'Nessuit','10'),(35,'Lare','10'),(36,'Njoro','10'),(37,'Menengai west','11'),(38,'Soin','11'),(39,'Visoi','11'),(40,'Mosop','11'),(41,'Waseges','12'),(42,'Kabazi','12'),(43,'Narok Town','14'),(44,'Nanyuki','29'),(45,'Menengai','38'),(46,'Barut','38'),(47,'London','38'),(48,'Kaptembwo','38'),(49,'Kapkures','38'),(50,'Rhoda','38'),(51,'Shaabab','38'),(52,'Kivumbini','38'),(53,'Flamingo','38'),(54,'Nakuru east','38'),(55,'Igwamiti','30')"); 
+  con1.st1.executeUpdate("INSERT INTO `ward` VALUES (1,'Dundori','3'),(2,'Kabatini','3'),(3,'Kiamaina','3'),(4,'Lanet/umoja','3'),(5,'Bahati','3'),(6,'Gilgil','4'),(7,'Kiptororo','5'),(8,'Nyota','5'),(9,'Sirikwa','5'),(10,'Kamara','5'),(11,'Amalo','5'),(12,'Keringet','5'),(13,'Kiptagich','5'),(14,'Tinet','5'),(15,'Mariashoni','6'),(16,'Elburgon','6'),(17,'Turi','6'),(18,'Molo','6'),(19,'Hells gate','7'),(20,'Lake view','7'),(21,'Mai mahiu','7'),(22,'Maiella','7'),(23,'Olkaria','7'),(24,'Naivasha east','7'),(25,'Viwandani','7'),(26,'Elementaita','4'),(27,'Mbaruk/eburu','7'),(28,'Malewa west','4'),(29,'Murindati','4'),(30,'Biashara','7'),(31,'Mau narok','10'),(32,'Mauche','10'),(33,'Kihingo','10'),(34,'Nessuit','10'),(35,'Lare','10'),(36,'Njoro','10'),(37,'Menengai west','11'),(38,'Soin','11'),(39,'Visoi','11'),(40,'Mosop','11'),(41,'Waseges','12'),(42,'Kabazi','12'),(43,'Narok Town','14'),(44,'Nanyuki','29'),(45,'Menengai','38'),(46,'Barut','38'),(47,'London','38'),(48,'Kaptembwo','38'),(49,'Kapkures','38'),(50,'Rhoda','38'),(51,'Shaabab','38'),(52,'Kivumbini','38'),(53,'Flamingo','38'),(54,'Nakuru east','38'),(55,'Igwamiti','30')"); 
   System.out.println("inserting ward table"); 
 
 }
@@ -485,6 +488,9 @@ if(!con1.rs.next()){
            con1.st1.executeUpdate("UPDATE ward SET district_id='32' WHERE wardid='54'");
            con1.st1.executeUpdate("UPDATE ward SET district_id='32' WHERE wardid='53'");         
            con1.st1.executeUpdate("UPDATE ward SET district_id='32' WHERE wardid='52'");
+           con1.st1.executeUpdate("UPDATE ward SET district_id='4' WHERE wardid='29'");//elementaita
+           con1.st1.executeUpdate("UPDATE ward SET district_id='4' WHERE wardid='26'");////murindati
+           con1.st1.executeUpdate("UPDATE ward SET district_id='4' WHERE wardid='28'");//malewa west
            con1.st1.executeUpdate("REPLACE INTO ward (wardid,wardname,district_id) VALUES ('55','Igwamiti', '30')");
              
 
@@ -510,16 +516,7 @@ if(!con1.rs.next()){
             }
                       
             
-            if(con1.rs!=null){con1.rs.close();}
-            if(con1.rs3!=null){con1.rs3.close();}
-            if(con1.st!=null){con1.st.close();}
-            if(con1.st1!=null){con1.st1.close();}
-            if(con1.st3!=null){con1.st3.close();}
-            
-            if(con.rs!=null){con.rs.close();}
-            if(con.st!=null){con.st.close();}
-            if(con.st1!=null){con.st1.close();}
-            if(con.st4!=null){con.st4.close();}
+          
             
             
 %>
@@ -568,8 +565,22 @@ if(session.getAttribute("isfacilsadded")!=null){
 
 
 </h4>
+
+      <style>
+    #content{
+        
+        font-family: cambria;
+        font-size: 17px;
+    }
+    select{
+        
+        width:170px;
+    }
+    
+</style> 
 <p><font color="red">*</font> indicates must fill fields</p>
-<form action="add_group_session" method="get">
+
+<form id="loginform" action="add_group_session" method="get">
 <table cellpadding="2px" cellspacing="3px" border="0px">
 
 
@@ -578,7 +589,7 @@ if(session.getAttribute("isfacilsadded")!=null){
 
 <tr>
 <td class="align_button_right">County<font color="red">*</font></td>
-<td><Select id="pdt_cat" class="textbox6" onchange="filter_districts(this);"  required ="true" name="county" >
+<td><Select id="pdt_cat" style="width:150px;" class="textbox6" onchange="filter_districts(this);"  required ="true" name="county" >
 
 <option value="">Choose County</option>  
 <option value="4">Baringo</option>
@@ -599,7 +610,7 @@ if(session.getAttribute("isfacilsadded")!=null){
 
 <tr>  
 <td class="align_button_right">Sub-County<font color="red">*</font></td>
-<td><Select id="district" class="textbox6"  required ="true" onchange="filter_partner(this);loadward();" name="district" >
+<td><Select id="district" class="textbox6" style="width:150px;" required ="true" onchange="filter_partner(this);loadward();" name="district" >
 
 <option value="">Choose Sub-county</option>  
 </select></td><td></td></tr>
@@ -607,7 +618,7 @@ if(session.getAttribute("isfacilsadded")!=null){
 
 <tr>  
 <td class="align_button_right">Ward<font color="red">*</font></td>
-<td><Select id="ward" class="textbox6"  required ="true" onchange="" name="ward" >
+<td><Select id="ward" style="width:150px;" class="textbox6"  required ="true" onchange="" name="ward" >
 
 <option value="">Choose Ward</option>  
 </select></td><td></td></tr>
@@ -615,13 +626,13 @@ if(session.getAttribute("isfacilsadded")!=null){
 
 <tr>  
 <td class="align_button_right" style="width:300px;">Implementing Partner<font color="red">*</font></td>
-<td><Select id="partner_name" class="textbox6"  required ="true" onchange="filter_target_pop(this);" name="partner_name" >
+<td><Select id="partner_name" style="width:150px;" class="textbox6"  required ="true" onchange="filter_target_pop(this);" name="partner_name" >
 
 <option value="">Choose partner</option>  
 </select></td><td ><input type="hidden" id="hidden_partner" name="hidden_partner" /></td></tr>
 
 <tr> <td class="align_button_right">Target Population <font color="red">*</font></td>
-<td><Select id="target_pop" class="textbox6" onchange="filter_gr(this);"   required ="true" name="target_pop" >
+<td><Select id="target_pop" style="width:150px;" class="textbox6" onchange="filter_gr(this);"   required ="true" name="target_pop" >
 
 <option value="">target population</option>  
 
@@ -631,7 +642,7 @@ if(session.getAttribute("isfacilsadded")!=null){
 
 
 <tr> <td class="align_button_right">Group Category<font color="red">*</font></td>
-<td><Select id="grpcat" class="textbox6" onchange="grptype(this);"   required ="true" name="grpcat" >
+<td><Select id="grpcat" style="width:150px;" class="textbox6" onchange="grptype(this);"   required ="true" name="grpcat" >
 
 <option value="">category</option>  
 <option value="new">New Group</option>  
@@ -644,7 +655,7 @@ if(session.getAttribute("isfacilsadded")!=null){
 <tr> 
     
     <td class="align_button_right"><p id="gname" style="display: none;">Group Name <font color="red">*</font><p></td>
-<td><Select style="display:none;" id="group_name" class="textbox6"  required ="true" name="group_name" >
+<td><Select style="display:none;width:150px;" id="group_name" class="textbox6"  required ="true" name="group_name" >
 
 <option value="">Choose Group</option>  
 
@@ -659,21 +670,23 @@ if(session.getAttribute("isfacilsadded")!=null){
 <tr> 
     
     <td class="align_button_right"><p id="newgname" style="display: none;">Enter Group Name <font color="red">*</font><p></td>
-    <td><input type="text" style="display:none;"  oninput="checkgrpname();" id="newgroup_name" class="textbox"  required  name="newgroup_name" />
+    <td><input type="text" style="display:none;width:150px;"  oninput="checkgrpname();" id="newgroup_name" class="textbox"  required  name="newgroup_name" />
 
 </td>
 
 </tr>
 
 
-<tr><td class="align_button_right"></td><td><input type="hidden" name="no_of_groups" readonly="true" value="1" required class="textbox" /></td></tr>
+<tr><td class="align_button_right"></td><td><input type="hidden" style="width:150px;" name="no_of_groups" readonly="true" value="1" required class="textbox" /></td></tr>
 
 <tr><td></td><td>
         <input type="hidden" name="prevpage" value="FormWizard.jsp"/>
-        <input type="submit" value="Next" style="background-color: orange; height:35px;width:100px;"/></td></tr>
+        <input type="submit" value="Next" style="background-color: orange; height:35px;width:150px;"/></td></tr>
 
 </table>
-</form
+</form>
+<div id="versionChecker" style="font-weight: bolder; text-align:center;">
+                         </div>
 <%
 Calendar cal = Calendar.getInstance();
 int year= cal.get(Calendar.YEAR);              
@@ -688,5 +701,86 @@ int year= cal.get(Calendar.YEAR);
             </div>
 </div>    
 
+
+<%
+
+String locktableexists="SHOW TABLES LIKE 'lock_data'";
+
+
+con1.rs=con1.st.executeQuery(locktableexists);
+if(!con1.rs.next()){
+
+//now create the table
+    
+  con1.st1.executeUpdate("CREATE TABLE `lock_data` (  `id` int(11) NOT NULL AUTO_INCREMENT,  `lock_date` varchar(45) DEFAULT NULL,  `min_date` varchar(45) DEFAULT NULL COMMENT 'This date is entered in the following format, month/day/ year e.g 08/28/2015 for August 28 2015.',  `updated_on` timestamp NULL DEFAULT CURRENT_TIMESTAMP,  PRIMARY KEY (`id`)) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8"); 
+  con1.st1.executeUpdate("insert into lock_data(lock_date,min_date) values ('07/10/2015','07/01/2015')"); 
+ 
+
+}
+else {
+
+
+%>
+<script>
+    
+                   $.ajax({
+                        url:'setSystemDate',                         
+                        type:'post',  
+                        dataType: 'html',  
+                        success: function(data) {}
+                        
+                         });
+                   
+               
+               
+                 function checkVersion(){
+//    CHECK Version------------------- 
+//$("#versionChecker").html("<p>Checking for newer Version...</p>");
+var versionText="",daysRemaining,warningText="",sentOn="",version_name="";
+ $.ajax({
+                    url:"version",
+                    type:'post',
+                    dataType:'html',
+                    success:function (data){
+                        if(data.trim()==="no_internet"){
+   // $("#versionChecker").html  ("<p style='color: blue; font-size:10px;'>Unable to check if there is a newer version of HC1 system due to limited or no internet connection.</p>");
+      setInterval(function(){ checkVersion(); }, 60000);          
+                                                       }
+                        else{
+                            
+        
+                      if(data.contains("outdated version")){
+                          $("#loginform").css("display","none");  
+                      
+                      }
+$("#versionChecker").html(data);
+                        }
+  }  
+  });   
+      }
+ 
+                         
+   checkVersion();                
+               
+</script>    
+
+<%
+}
+
+
+  if(con1.rs!=null){con1.rs.close();}
+            if(con1.rs3!=null){con1.rs3.close();}
+            if(con1.st!=null){con1.st.close();}
+            if(con1.st1!=null){con1.st1.close();}
+            if(con1.st3!=null){con1.st3.close();}
+            
+            if(con.rs!=null){con.rs.close();}
+            if(con.st!=null){con.st.close();}
+            if(con.st1!=null){con.st1.close();}
+            if(con.st4!=null){con.st4.close();}
+
+
+
+%>
 </body>
 </html>

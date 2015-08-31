@@ -234,7 +234,8 @@ String existancechecker = "select * from facilitator_details where facilitator_i
 
             while (conn.rs.next()) {
 
-                String wardid=conn.rs.getString(7);
+                  String wardid="";
+                if(conn.rs.getString(7)!=null){ wardid=conn.rs.getString(7);}
               if(wardid.contains(",")){ 
               String wards[]=wardid.split(",");
               wardid=wards[0];
@@ -251,12 +252,14 @@ String existancechecker = "select * from facilitator_details where facilitator_i
 
 
                 conn1.rs1 = conn1.st1.executeQuery(existancechecker);
-
+ String timestamp="";
                 if (conn1.rs1.next()) {
-
-                  
+                         if(conn1.rs1.getTimestamp("timestamp")!=null){
+                  timestamp=conn1.rs1.getTimestamp("timestamp").toString(); 
+                                                                        }
+                 if(timestamp.equals("null")||timestamp==null){timestamp="";}
                     
-                    if(!conn1.rs1.getTimestamp("timestamp").toString().equals(conn.rs.getTimestamp("timestamp").toString())){
+                    if(!timestamp.equals(conn.rs.getTimestamp("timestamp").toString())){
                     
                         String upd="update groups set group_name='"+conn.rs.getString(2)+"',partner_id='"+conn.rs.getString(3)+"',target_pop_id='"+conn.rs.getString(4)+"',district_id='"+conn.rs.getString(5)+"',timestamp='"+conn.rs.getTimestamp(6)+"',wardid='" +wardid + "' where group_id='"+conn.rs.getString(1)+"' ";
                         

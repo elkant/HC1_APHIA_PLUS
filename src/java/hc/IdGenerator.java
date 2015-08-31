@@ -16,7 +16,7 @@ public class IdGenerator {
  Calendar cal = Calendar.getInstance();
 int year=cal.get(Calendar.YEAR);
 int month=cal.get(Calendar.MONTH)+1;
-int date=cal.get(Calendar.DATE);
+public int date=cal.get(Calendar.DATE);
 int hour = cal.get(Calendar.HOUR_OF_DAY);
 int min=cal.get(Calendar.MINUTE);
 int sec=cal.get(Calendar.SECOND);

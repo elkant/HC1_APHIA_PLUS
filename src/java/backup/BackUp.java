@@ -219,6 +219,7 @@ String createdeletedtable="CREATE TABLE IF NOT EXISTS `deleted_member_details` (
                         File f = new File(current_drive + ":\\wamp\\mysql\\bin\\");
                         File f1 = new File(current_drive + ":\\wamp\\bin\\mysql\\mysql5.6.12\\bin");
                         File f2 = new File(current_drive + ":\\Program Files\\MySQL\\MySQL Server 5.5\\bin");
+                        File f4 = new File(current_drive + ":\\Program Files\\MySQL\\MySQL Server 5.6\\bin");
                         File f3 = new File(current_drive + ":\\APHIAPLUS\\HC_SYSTEM");
 
                         //     CREATE A DIRECTORY AND THE FILE TO HOLD DATA
@@ -270,9 +271,14 @@ String createdeletedtable="CREATE TABLE IF NOT EXISTS `deleted_member_details` (
                             executeCmd = current_drive + ":\\wamp\\bin\\mysql\\mysql5.6.12\\bin\\mysqldump  --host=" + localhostsplit[0] + " --port=" + localhostsplit[1] + " --user=" + dbuser + " --password=" + dbpassword + " " + dbname + " facilitator_details transfer_facilitator forms groups member_details new_topic register_attendance session topics deleted_register_attendance deleted_member_details --where=timestamp>='" + lasttimestamp + "' -r " + dbpath + "";
                             found_folder = "it is new wamp";
                         }
-                        if (f2.exists() && f2.isDirectory()) {
+                        else if (f2.exists() && f2.isDirectory()) {
                             executeCmd = current_drive + ":\\Program Files\\MySQL\\MySQL Server 5.5\\bin\\mysqldump  --host=" + localhostsplit[0] + " --port=" + localhostsplit[1] + " --user=" + dbuser + " --password=" + dbpassword + " " + dbname + " facilitator_details transfer_facilitator forms groups member_details new_topic register_attendance session topics deleted_register_attendance deleted_member_details --where=timestamp>='" + lasttimestamp + "' -r " + dbpath + "";
-                            found_folder = "it is workbench";
+                            found_folder = "it is workbench 5.5";
+                        }
+                        
+                        else if (f4.exists() && f4.isDirectory()) {
+                            executeCmd = current_drive + ":\\Program Files\\MySQL\\MySQL Server 5.6\\bin\\mysqldump  --host=" + localhostsplit[0] + " --port=" + localhostsplit[1] + " --user=" + dbuser + " --password=" + dbpassword + " " + dbname + " facilitator_details transfer_facilitator forms groups member_details new_topic register_attendance session topics deleted_register_attendance deleted_member_details --where=timestamp>='" + lasttimestamp + "' -r " + dbpath + "";
+                            found_folder = "it is workbench 5.6";
                         }
                     } catch (SQLException ex) {
 
