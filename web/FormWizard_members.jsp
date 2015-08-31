@@ -41,7 +41,14 @@ Author     : SIXTYFOURBIT
 
 <script type="text/javascript" src="js/noty/themes/default.js"></script>         
 <script type="text/javascript" src="js/js/sisyphus.min.js"></script>
-                         
+<style>
+    #content{
+        
+        font-family: cambria;
+        font-size: 17px;
+    }
+    
+</style>                         
                 
 <title>add members</title>
 <script type="text/javascript">
@@ -273,6 +280,29 @@ return false;
 return true;
 }
 //-->
+
+
+
+
+//create a function to prevent one from entering a value greater than 40
+function maxparticipants(){
+    
+    var valu=$("#number_of_members").val();
+ 
+   if(parseInt(valu)>50){
+       alert("You can only add up to 50 Participants at a go.");
+       $("submit").prop('disabled', true);
+       $("#number_of_members").val("50");
+       //show a message that max no of participants is exceeded
+   } 
+    else {
+     $("submit").prop('disabled', false);   
+        
+    }
+    
+}
+
+
 </script> 
 
 </head>
@@ -393,10 +423,10 @@ int year1= cal.get(Calendar.YEAR);  %>
 </select></td>
 </tr>
 
-<tr><td class="align_button_right">Number of participants<font color="red">*</font></td><td><input type="text" onkeypress="return numbers(event);" name="number_of_members" required class="textbox" /></td></tr>
+<tr><td class="align_button_right">Number of participants<font color="red">*</font></td><td><input type="text" onkeypress="return numbers(event);" onkeyup="maxparticipants();"  name="number_of_members" id="number_of_members" required class="textbox" /></td></tr>
 
 
-<tr><td></td><td><input type="submit" value="Next" style="height: 35px;width: 130px; background-color: orange;"/></td></tr>
+<tr><td></td><td><input id="submit" name="submit" type="submit" value="Next" style="height: 35px;width: 130px; background-color: orange;"/></td></tr>
 
 </table>
 </form>
@@ -416,5 +446,8 @@ int year= cal.get(Calendar.YEAR);
             </div>
 </div>    
 
+               
+               
+                   
 </body>
 </html>
