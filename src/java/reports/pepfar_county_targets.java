@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Formatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -82,7 +81,7 @@ int report2_m,report2_f;
        
          
          
-       report2_f=report2_m=0;
+        report2_f=report2_m=0;
         
         shet2.setColumnWidth(0, 500);
         shet2.setColumnWidth(1, 500); 
@@ -548,7 +547,7 @@ int report2_m,report2_f;
             if(report2_m>0){
                 
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~"+report2_m/curtarget);
-                  double ans=(((report2_m*100)/curtarget));
+                  double ans=Math.round(((report2_m*100)/curtarget));
                   //ans=new DecimalFormat("#.##").format(ans );
                   
                // ans=ans*100;
@@ -733,7 +732,7 @@ int report2_m,report2_f;
             HSSFCell achievedcell= rwaa.createCell(posit);        
              posit++;
             if(report2_f>0){
-                 double ans=(((report2_f*100)/curtarget));
+                 double ans=Math.round((((report2_f*100)/curtarget)));
                           System.out.println("~f~~f~~f~~f~~~~~~~~"+report2_f+"/"+curtarget);
                  System.out.println("~~~~~~~~~~~~~~~~~~~~~~~"+report2_f/curtarget);
                
@@ -784,12 +783,11 @@ int report2_m,report2_f;
          
          Date dat= new Date();
         // Formatter formatter= new Formatter
-                   Format formatter = new SimpleDateFormat("yyyy-MM-dd");
-         
-         
+        
+         Format formatter = new SimpleDateFormat("yyyy-MM-dd");
          String tdate=formatter.format(dat);
          String date1=tdate.toString().replace(" ","_");
-          date1=tdate.toString().replace(":","_");
+         date1=tdate.toString().replace(":","_");
          
          // write it as an excel attachment
     ByteArrayOutputStream outByteStream = new ByteArrayOutputStream();
